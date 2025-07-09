@@ -1119,7 +1119,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "WASD",
+                    "name": "IJKL",
                     "id": "2d251444-0bcd-446b-8d49-65d86e2c4cef",
                     "path": "2DVector",
                     "interactions": "",
@@ -1132,7 +1132,7 @@
                 {
                     "name": "up",
                     "id": "4bccc669-3278-4e71-8617-b56308d0c2c3",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1143,7 +1143,7 @@
                 {
                     "name": "down",
                     "id": "d0fdf59d-dce4-4f50-96bc-962151241209",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1154,7 +1154,7 @@
                 {
                     "name": "left",
                     "id": "47801aa1-b776-44d9-be35-e4b8ac68224c",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1165,7 +1165,7 @@
                 {
                     "name": "right",
                     "id": "9440e54c-c951-442d-b578-b625ff1d9422",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
