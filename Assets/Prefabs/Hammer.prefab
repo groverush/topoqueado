@@ -120,6 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5459700220173648250}
   - component: {fileID: 3804716645117521673}
+  - component: {fileID: 1551025636103226626}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -135,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3633769059094823161}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 6.87978, z: -0.035603046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -255,13 +256,13 @@ MonoBehaviour:
     m_ActionName: Mole/PopOut
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3633769059094823161}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1551025636103226626}
+        m_TargetAssemblyTypeName: HammerController, Assembly-CSharp
+        m_MethodName: MoveHammer
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -270,14 +271,42 @@ MonoBehaviour:
     m_ActionId: 4b8fd59d-ae3a-4b0a-99de-f89c5edef8af
     m_ActionName: Hammer/Move
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1551025636103226626}
+        m_TargetAssemblyTypeName: HammerController, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 3e71d63e-dc89-4ee7-a574-59b12dceb351
     m_ActionName: Hammer/Hit
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard&Mouse
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Hammer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1551025636103226626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveStep: 1.5
+  gridPosition: {x: 1, y: -2}
+  hammerHead: {fileID: 5459700220173648250}
+  hitSpeed: 200
 --- !u!1 &7064202947558811362
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +321,7 @@ GameObject:
   - component: {fileID: 6937210510159761323}
   - component: {fileID: 613986020572196082}
   m_Layer: 0
-  m_Name: Hammer
+  m_Name: Hammer Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
