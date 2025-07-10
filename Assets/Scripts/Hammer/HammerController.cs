@@ -68,8 +68,6 @@ public class HammerController : MonoBehaviour
         transform.position = newPosition;
     }
 
-
-
     private IEnumerator HitAnimation ()
     {
         isHitting = true;
