@@ -4,94 +4,115 @@ using System.Collections;
 
 public class HammerController : MonoBehaviour
 {
-    [SerializeField] private float moveStep = 1.5f;
-    [SerializeField] private Vector2Int gridPosition = new Vector2Int(1, 2); // Posición inicial (centro abajo = hoyo 8)
+    [Header("Movement Settings")]
+    [SerializeField] private float moveStep = 1.5f; // Distance the hammer moves per input step
+    [SerializeField] private float moveDuration = 0.1f; // Duration of each movement
+    [SerializeField] private float repeatDelay = 0.2f; // Delay between repeated movements
+    [SerializeField] private float moveCooldown = 0.1f; // Delay before fade out
+
+    [Header("Hammer Settings")]
     [SerializeField] private Transform hammerHead;
-    [SerializeField] private float hitSpeed = 10f;
+    [SerializeField] private GameObject hammerVisual; 
+    [SerializeField] private Vector3 hammerRestPosition = new Vector3(0f, 2f, 0f); // Ajusta valores por defecto
+    [SerializeField] private Vector3 hitOffset = new Vector3(0f, 0f, 0f); // ← Ajustable desde el editor
+    [SerializeField] private float initialHammerAngle = -90f; // Starting rotation angle
+    [SerializeField] private float hitAngle = -180f; // Rotation angle when hitting
+    [SerializeField] private float hitDownDuration = 0.08f; // Time to swing down
+    [SerializeField] private float hitPause = 0.05f; // Pause after hitting
+    [SerializeField] private float hitCooldown = 0.1f; // Delay before fade out
 
     private bool isHitting = false;
-    private Vector2Int previousDirection = Vector2Int.zero;
+    private float moveTimer = 0f;
+    private PlayerInput playerInput;
+    private InputAction moveAction;
+    private HoleNavigation holeNavigation;
 
-    public void MoveHammer ( InputAction.CallbackContext context )
+    private void Awake ()
     {
-        if (!context.performed || isHitting) return;
+        hammerHead.position = hammerRestPosition;
+        hammerHead.localRotation = Quaternion.Euler(initialHammerAngle, 0f, 0f);
 
-        Vector2 input = context.ReadValue<Vector2>();
-        Vector2Int direction = Vector2Int.zero;
+        playerInput = GetComponent<PlayerInput>();
+        moveAction = playerInput.actions["MoveHammer"];
+        holeNavigation = GetComponent<HoleNavigation>();
+    }
 
-        // Leer con margen de tolerancia y convertir a dirección grilla
-        if (input.y > 0.5f)       // W
-            direction = new Vector2Int(0, -1);
-        else if (input.y < -0.5f) // S
-            direction = new Vector2Int(0, 1);
-        else if (input.x < -0.5f) // A
-            direction = new Vector2Int(-1, 0);
-        else if (input.x > 0.5f)  // D
-            direction = new Vector2Int(1, 0);
 
-        if (direction == Vector2Int.zero || direction == previousDirection)
-            return;
+    private void Update ()
+    {
+        moveTimer += Time.deltaTime;
+        Vector2 movementHammer = moveAction.ReadValue<Vector2>();
 
-        // Calcular nueva posición tentativa
-        Vector2Int nextPosition = gridPosition + direction;
-
-        // Verificar que esté dentro de los límites de la grilla (0 a 2)
-        if (nextPosition.x >= 0 && nextPosition.x <= 2 && nextPosition.y >= 0 && nextPosition.y <= 2)
+        if (movementHammer != Vector2.zero && moveTimer >= moveCooldown)
         {
-            gridPosition = nextPosition;
-            UpdateHammerPosition();
+            holeNavigation.SelectHole(movementHammer, Vector3.right, Vector3.forward);
+            moveTimer = 0f;
         }
-
-        // Guardar dirección para no repetir movimiento mientras se mantiene presionada
-        previousDirection = direction;
     }
 
-    public void ResetDirection ( InputAction.CallbackContext context )
-    {
-        if (!context.canceled) return;
-        previousDirection = Vector2Int.zero;
-    }
-
+    // Public method to trigger hammer hit
     public void OnHit ()
     {
         if (!isHitting)
             StartCoroutine(HitAnimation());
     }
 
-    private void UpdateHammerPosition ()
-    {
-        Vector3 newPosition = new Vector3(
-            gridPosition.x * moveStep,         // eje X: columnas
-            transform.position.y,              // altura se mantiene
-            -gridPosition.y * moveStep         // eje Z invertido para representar filas de arriba a abajo
-        );
-        transform.position = newPosition;
-    }
-
+    // Full hit animation flow, including fade in/out
     private IEnumerator HitAnimation ()
     {
         isHitting = true;
 
-        float rotationAmount = 0;
-        while (rotationAmount < 90)
+        Vector3 holePos = holeNavigation.GetCurrentHole().transform.position;
+        Vector3 startPos = hammerRestPosition;
+        Vector3 targetPos = new Vector3(holePos.x, startPos.y, holePos.z) + hitOffset;
+
+        // 1. Moverse hacia el agujero
+        float moveToTime = 0.1f;
+        float elapsed = 0f;
+        while (elapsed < moveToTime)
         {
-            float step = hitSpeed * Time.deltaTime;
-            hammerHead.Rotate(Vector3.right, step);
-            rotationAmount += step;
+            hammerHead.position = Vector3.Lerp(startPos, targetPos, elapsed / moveToTime);
+            elapsed += Time.deltaTime;
             yield return null;
         }
+        hammerHead.position = targetPos;
 
-        yield return new WaitForSeconds(0.1f);
-
-        while (rotationAmount > 0)
+        // 2. Golpear (rotar)
+        Quaternion startRot = Quaternion.Euler(initialHammerAngle, 0f, 0f);
+        Quaternion downRot = Quaternion.Euler(hitAngle, 0f, 0f);
+        elapsed = 0f;
+        while (elapsed < hitDownDuration)
         {
-            float step = hitSpeed * Time.deltaTime;
-            hammerHead.Rotate(Vector3.left, step);
-            rotationAmount -= step;
+            hammerHead.localRotation = Quaternion.Slerp(startRot, downRot, elapsed / hitDownDuration);
+            elapsed += Time.deltaTime;
             yield return null;
         }
+        hammerHead.localRotation = downRot;
+
+        yield return new WaitForSeconds(hitPause);
+
+        // 3. Volver rotación
+        elapsed = 0f;
+        while (elapsed < hitDownDuration)
+        {
+            hammerHead.localRotation = Quaternion.Slerp(downRot, startRot, elapsed / hitDownDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        hammerHead.localRotation = startRot;
+
+        // 4. Volver a la posición base
+        elapsed = 0f;
+        while (elapsed < moveToTime)
+        {
+            hammerHead.position = Vector3.Lerp(targetPos, startPos, elapsed / moveToTime);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        hammerHead.position = startPos;
 
         isHitting = false;
-        Debug.Log("Hammer hit!");
     }
+
+
 }
