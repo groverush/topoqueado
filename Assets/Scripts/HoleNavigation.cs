@@ -15,7 +15,6 @@ public class HoleNavigation : MonoBehaviour
         currentHole = newHole;
     }
 
-
     void Awake()
     {
         if (holes.Count > 0)
@@ -69,14 +68,14 @@ public class HoleNavigation : MonoBehaviour
                 closestHole = hole;
                 shortestDistance = distance;
             }
+        }
 
-            // If a valid object was found, the highlight is updated
-            if (closestHole != null)
-            {
-                RemoveHighlight(currentHole);
-                currentHole = closestHole;
-                Highlight(currentHole);
-            }
+        // If a valid object was found, the highlight is updated
+        if (closestHole != null)
+        {
+            RemoveHighlight(currentHole);
+            currentHole = closestHole;
+            Highlight(currentHole);
         }
     }
 

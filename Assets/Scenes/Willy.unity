@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &175014963 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
-  m_PrefabInstance: {fileID: 2842024729379126864}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &197726157
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,12 +131,13 @@ GameObject:
   - component: {fileID: 197726160}
   - component: {fileID: 197726159}
   - component: {fileID: 197726158}
+  - component: {fileID: 197726165}
   - component: {fileID: 197726163}
   - component: {fileID: 197726164}
   - component: {fileID: 197726162}
   m_Layer: 0
   m_Name: Mole
-  m_TagString: Untagged
+  m_TagString: Mole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 197726157}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.078146175, y: 1.94, z: 0.74}
+  m_LocalPosition: {x: 0.109, y: 1.76, z: 1.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -356,7 +352,7 @@ MonoBehaviour:
     m_ActionName: 'Hammer/Hit[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Mole
+  m_DefaultActionMap: Hammer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &197726163
@@ -372,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementCooldown: 0.3
-  popOutCooldown: 0
+  popOutCooldown: 0.3
 --- !u!114 &197726164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +391,33 @@ MonoBehaviour:
   - {fileID: 779626996}
   - {fileID: 424006100}
   - {fileID: 1309639481}
-  currentHole: {fileID: 0}
+--- !u!54 &197726165
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 197726157}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!43 &207033389
 Mesh:
   m_ObjectHideFlags: 0
@@ -1075,7 +1097,7 @@ Transform:
   m_GameObject: {fileID: 530098834}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -476.9, y: 106.6, z: -367.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1109,26 +1131,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1551025636103226626, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
   m_PrefabInstance: {fileID: 2842024729379126864}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175014963}
-  m_Enabled: 1
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &591083412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 175014963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holes: []
-  currentHole: {fileID: 0}
 --- !u!43 &663097970
 Mesh:
   m_ObjectHideFlags: 0
@@ -3973,12 +3981,24 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1551025636103226626, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_Name
       value: Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804716645117521673, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3804716645117521673, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
@@ -4073,17 +4093,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6937210510159761323, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7064202947558811362, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_Name
       value: Hammer Head
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7064202947558811362, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_TagString
+      value: Hammer
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6937210510159761323, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 591083412}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
 --- !u!1001 &5816962572873921299
 PrefabInstance:
@@ -4157,6 +4183,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 365671562}
+    - target: {fileID: 1126954873383863835, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1249045743744340595, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4177,6 +4207,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1964063140}
+    - target: {fileID: 1979170156611739247, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2381644936055689922, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4292,6 +4326,10 @@ PrefabInstance:
     - target: {fileID: 5515569030415871820, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
       propertyPath: m_Materials.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668803024060732556, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5959418093483099776, guid: b0fa9f4ffb144b140a09d3f9bf01d4df, type: 3}
       propertyPath: m_LocalPosition.x
