@@ -5,7 +5,10 @@ public class HoleNavigation : MonoBehaviour
 {
     // === Holes ===
     [SerializeField] private List<GameObject> holes = new();
-    [SerializeField] private GameObject currentHole;
+    private GameObject currentHole;
+
+    // === Getter ===
+    public GameObject CurrentHole => currentHole;
 
     void Awake()
     {
@@ -60,14 +63,14 @@ public class HoleNavigation : MonoBehaviour
                 closestHole = hole;
                 shortestDistance = distance;
             }
+        }
 
-            // If a valid object was found, the highlight is updated
-            if (closestHole != null)
-            {
-                RemoveHighlight(currentHole);
-                currentHole = closestHole;
-                Highlight(currentHole);
-            }
+        // If a valid object was found, the highlight is updated
+        if (closestHole != null)
+        {
+            RemoveHighlight(currentHole);
+            currentHole = closestHole;
+            Highlight(currentHole);
         }
     }
 
