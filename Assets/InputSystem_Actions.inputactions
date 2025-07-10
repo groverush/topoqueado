@@ -1088,7 +1088,7 @@
             "id": "767b9f7b-458b-44da-9922-11d7fe33c5e9",
             "actions": [
                 {
-                    "name": "Move",
+                    "name": "MoveHammer",
                     "type": "Value",
                     "id": "4b8fd59d-ae3a-4b0a-99de-f89c5edef8af",
                     "expectedControlType": "Vector2",
@@ -1125,7 +1125,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveHammer",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -1136,7 +1136,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveHammer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -1147,7 +1147,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveHammer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -1158,7 +1158,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveHammer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -1169,7 +1169,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Move",
+                    "action": "MoveHammer",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
