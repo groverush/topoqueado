@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 2985335000657358558}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07, y: 1.5799999, z: -0.009999998}
+  m_LocalPosition: {x: 6.143802, y: 2.2259917, z: -2.1985996}
   m_LocalScale: {x: 0.3, y: 1.5, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5459700220173648250}
+  m_Father: {fileID: 7470941558781572780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2970414024925762102
 MeshFilter:
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 15e1f2b8147102d47937eb22abfa553c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -141,8 +141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1703442988494804837}
-  - {fileID: 4012851352268627985}
+  - {fileID: 7470941558781572780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3804716645117521673
@@ -304,9 +303,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveStep: 1.5
-  gridPosition: {x: 1, y: -2}
+  moveDuration: 0.2
+  repeatDelay: 0.2
+  movementLimitsX: {x: -1.5, y: 1.5}
+  movementLimitsZ: {x: -4.5, y: -1.5}
   hammerHead: {fileID: 5459700220173648250}
-  hitSpeed: 200
+  hitSpeed: 10
+  initialHammerAngle: -90
+  hitAngle: -180
+  hitDownDuration: 0.08
+  hitPause: 0.05
+  hitCooldown: 0.1
+  hammerPreviewOutline: {fileID: 0}
+  impactOffset: {x: 0, y: 0, z: 3}
+  previewYOffset: {x: 0, y: 0.01, z: 0}
+  showPreview: 1
+--- !u!1 &6476226649848543444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7470941558781572780}
+  m_Layer: 0
+  m_Name: HammerVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7470941558781572780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6476226649848543444}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.073802, y: -0.6459918, z: 2.1885993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1703442988494804837}
+  - {fileID: 4012851352268627985}
+  m_Father: {fileID: 5459700220173648250}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7064202947558811362
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,11 +380,11 @@ Transform:
   m_GameObject: {fileID: 7064202947558811362}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: 0.07, y: 2.96, z: -0.05}
+  m_LocalPosition: {x: 6.143802, y: 3.6059918, z: -2.2385995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5459700220173648250}
+  m_Father: {fileID: 7470941558781572780}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &1652953641058728222
 MeshFilter:
@@ -373,7 +417,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 3cf52a1126610e0489c2b4bcdd828bd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
