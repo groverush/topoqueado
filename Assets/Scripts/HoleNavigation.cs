@@ -6,6 +6,15 @@ public class HoleNavigation : MonoBehaviour
     // === Holes ===
     [SerializeField] private List<GameObject> holes = new();
     [SerializeField] private GameObject currentHole;
+    public GameObject GetCurrentHole ()
+    {
+        return currentHole;
+    }
+    public void SetCurrentHole ( GameObject newHole )
+    {
+        currentHole = newHole;
+    }
+
 
     void Awake()
     {
