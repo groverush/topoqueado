@@ -62,7 +62,7 @@ public class HammerController : MonoBehaviour
     {
         isHitting = true;
 
-        Vector3 holePos = holeNavigation.GetCurrentHole().transform.position;
+        Vector3 holePos = holeNavigation.CurrentHole.transform.position;
         Vector3 startPos = hammerRestPosition;
         Vector3 targetPos = new Vector3(holePos.x, startPos.y, holePos.z) + hitOffset;
 
