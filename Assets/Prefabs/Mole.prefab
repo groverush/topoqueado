@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.109, y: 1.76, z: 1.11}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -154,7 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementCooldown: 0.3
-  movementInput: {x: 0, y: 0}
   popOutCooldown: 0.3
 --- !u!114 &3414655019479515355
 MonoBehaviour:
@@ -178,7 +177,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  currentHole: {fileID: 0}
 --- !u!114 &6760297994011002734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +296,6 @@ MonoBehaviour:
     m_ActionName: 'Hammer/Hit[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Hammer
+  m_DefaultActionMap: Mole
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

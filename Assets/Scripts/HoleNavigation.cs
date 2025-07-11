@@ -6,7 +6,7 @@ public class HoleNavigation : MonoBehaviour
 {
     // === Holes ===
     [SerializeField] private List<GameObject> holes = new();
-    [SerializeField] private GameObject currentHole;
+    private GameObject currentHole;
 
     // === Getter ===
     public GameObject CurrentHole => currentHole;

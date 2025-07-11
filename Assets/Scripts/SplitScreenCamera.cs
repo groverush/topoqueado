@@ -14,12 +14,12 @@ public class SplitScreenCamera : MonoBehaviour
     {
         if (moleCamera != null)
         {
-            moleCamera.rect = new Rect(0, 0, 0.5f, 1); // 👈 Izquierda: x, y, width, height
+            moleCamera.rect = new Rect(0, 0, 0.5f, 1); // 👈 Left: x, y, width, height
         }
 
         if (hammerCamera != null)
         {
-            hammerCamera.rect = new Rect(0.5f, 0, 0.5f, 1); // 👈 Derecha: x, y, width, height
+            hammerCamera.rect = new Rect(0.5f, 0, 0.5f, 1); // 👈 Right: x, y, width, height
         }
     }
 }

@@ -43,6 +43,11 @@ public class MoleController : MonoBehaviour
         popOutAction.canceled += OnPopOutReleased;
     }
 
+    void OnDestroy()
+    {
+        popOutAction.canceled -= OnPopOutReleased;
+    }
+
     void Update()
     {
         // Movement with cooldown
@@ -70,8 +75,13 @@ public class MoleController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hammer"))
         {
-            PopIn();
             Debug.Log("Ouch!");
+            PopIn();
+
+            // Código provisional (se debe optimizar)
+            canPopOut = false;
+            popOutTimer = 0f;
+            StartCoroutine(PopOutCooldownRoutine());
         }
     }
 

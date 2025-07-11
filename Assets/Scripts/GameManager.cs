@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     {
         timer.StartCountdownGame();
     }
+
     public void RestartGame()
     {
-
         Time.timeScale = 1f; // Reset the game time scale
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
