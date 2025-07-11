@@ -12,14 +12,12 @@ public class HammerController : MonoBehaviour
 
     [Header("Hammer Settings")]
     [SerializeField] private Transform hammerHead;
-    [SerializeField] private GameObject hammerVisual; 
     [SerializeField] private Vector3 hammerRestPosition = new Vector3(0f, 2f, 0f); // Ajusta valores por defecto
     [SerializeField] private Vector3 hitOffset = new Vector3(0f, 0f, 0f); // ← Ajustable desde el editor
     [SerializeField] private float initialHammerAngle = -90f; // Starting rotation angle
     [SerializeField] private float hitAngle = -180f; // Rotation angle when hitting
     [SerializeField] private float hitDownDuration = 0.08f; // Time to swing down
     [SerializeField] private float hitPause = 0.05f; // Pause after hitting
-    [SerializeField] private float hitCooldown = 0.1f; // Delay before fade out
 
     private bool isHitting = false;
     private float moveTimer = 0f;
@@ -42,7 +40,7 @@ public class HammerController : MonoBehaviour
     {
         moveTimer += Time.deltaTime;
         Vector2 movementHammer = moveAction.ReadValue<Vector2>();
-
+        //Debug.Log("Se esta presionando el boton" + movementHammer);
         if (movementHammer != Vector2.zero && moveTimer >= moveCooldown)
         {
             holeNavigation.SelectHole(movementHammer, Vector3.right, Vector3.forward);
