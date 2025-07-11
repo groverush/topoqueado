@@ -1,22 +1,16 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-
     public bool isGameActive;
 
     float currCountdownValue;
     [Header("Countdown Elements")]
     [SerializeField] private GameObject timeoutPanel;
     [SerializeField] private TextMeshProUGUI timeLeftText;
-
-
-
+    [SerializeField] private int gameTime = 60;
 
     public IEnumerator StartCountdown(float countdownValue)
     {
@@ -36,12 +30,11 @@ public class Timer : MonoBehaviour
 
     public void StartCountdownGame()
     {
-
         isGameActive = true;
         timeLeftText.gameObject.SetActive(true);
-        StartCoroutine("StartCountdown", 3);
-
+        StartCoroutine("StartCountdown", gameTime);
     }
+
     public void GameOver()
     {
         timeLeftText.gameObject.SetActive(false);
@@ -50,7 +43,4 @@ public class Timer : MonoBehaviour
         isGameActive = false;
         Time.timeScale = 0f; // Game Paused
     }
-
-
-
 }

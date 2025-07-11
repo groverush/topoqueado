@@ -119,8 +119,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5459700220173648250}
-  - component: {fileID: 3804716645117521673}
   - component: {fileID: 1551025636103226626}
+  - component: {fileID: 1785807129030517438}
+  - component: {fileID: 3804716645117521673}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -144,6 +145,49 @@ Transform:
   - {fileID: 7470941558781572780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1551025636103226626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveCooldown: 0.5
+  hammerHead: {fileID: 6489626391347864345}
+  hammerVisual: {fileID: 6476226649848543444}
+  hammerRestPosition: {x: 0, y: 2, z: -5}
+  hitOffset: {x: 0, y: 3, z: -3}
+  initialHammerAngle: 0
+  hitAngle: 90
+  hitDownDuration: 0.1
+  hitPause: 0.2
+--- !u!114 &1785807129030517438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3804716645117521673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,19 +298,7 @@ MonoBehaviour:
     m_ActionId: d6613808-8d0e-49dc-85a0-ce8d854413db
     m_ActionName: Mole/PopOut
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1551025636103226626}
-        m_TargetAssemblyTypeName: HammerController, Assembly-CSharp
-        m_MethodName: MoveHammer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 4b8fd59d-ae3a-4b0a-99de-f89c5edef8af
     m_ActionName: Hammer/Move
   - m_PersistentCalls:
@@ -285,47 +317,11 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3e71d63e-dc89-4ee7-a574-59b12dceb351
     m_ActionName: Hammer/Hit
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Hammer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1551025636103226626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3633769059094823161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveStep: 1.5
-  moveDuration: 0.2
-  repeatDelay: 0.2
-  moveCooldown: 0.1
-  movementLimitsX: {x: -1.5, y: 1.5}
-  movementLimitsZ: {x: -4.5, y: -1.5}
-  hammerHead: {fileID: 5459700220173648250}
-  hammerVisual: {fileID: 0}
-  initialHammerAngle: -90
-  hitAngle: -180
-  hitDownDuration: 0.08
-  hitPause: 0.05
-  hitCooldown: 0.1
-  fadeDuration: 0.2
-  hammerPreviewOutline: {fileID: 0}
-  impactOffset: {x: 0, y: 0, z: 3}
-  previewYOffset: {x: 0, y: 0.01, z: 0}
-  showPreview: 1
-  hammerHeadRenderer: {fileID: 0}
-  hammerHeadOpaque: {fileID: 0}
-  hammerHeadTransparent: {fileID: 0}
-  hammerHandleRenderer: {fileID: 0}
-  hammerHandleOpaque: {fileID: 0}
-  hammerHandleTransparent: {fileID: 0}
 --- !u!1 &4280050123649858947
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +380,7 @@ Transform:
   m_GameObject: {fileID: 6476226649848543444}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.073802, y: 0.52, z: 2.1885993}
+  m_LocalPosition: {x: -6.14, y: -2.59, z: -1.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -402,11 +398,10 @@ GameObject:
   - component: {fileID: 4012851352268627985}
   - component: {fileID: 1652953641058728222}
   - component: {fileID: 2226202502068702916}
-  - component: {fileID: 6937210510159761323}
   - component: {fileID: 613986020572196082}
   m_Layer: 0
   m_Name: Hammer Head
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,29 +474,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6937210510159761323
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064202947558811362}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!65 &613986020572196082
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5,9 +5,6 @@ using System.Collections;
 public class HammerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float moveStep = 1.5f; // Distance the hammer moves per input step
-    [SerializeField] private float moveDuration = 0.1f; // Duration of each movement
-    [SerializeField] private float repeatDelay = 0.2f; // Delay between repeated movements
     [SerializeField] private float moveCooldown = 0.1f; // Delay before fade out
 
     [Header("Hammer Settings")]
@@ -19,7 +16,6 @@ public class HammerController : MonoBehaviour
     [SerializeField] private float hitAngle = -180f; // Rotation angle when hitting
     [SerializeField] private float hitDownDuration = 0.08f; // Time to swing down
     [SerializeField] private float hitPause = 0.05f; // Pause after hitting
-    [SerializeField] private float hitCooldown = 0.1f; // Delay before fade out
 
     private bool isHitting = false;
     private float moveTimer = 0f;
@@ -62,7 +58,7 @@ public class HammerController : MonoBehaviour
     {
         isHitting = true;
 
-        Vector3 holePos = holeNavigation.GetCurrentHole().transform.position;
+        Vector3 holePos = holeNavigation.CurrentHole.transform.position;
         Vector3 startPos = hammerRestPosition;
         Vector3 targetPos = new Vector3(holePos.x, startPos.y, holePos.z) + hitOffset;
 
@@ -113,6 +109,4 @@ public class HammerController : MonoBehaviour
 
         isHitting = false;
     }
-
-
 }
