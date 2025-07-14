@@ -23,6 +23,7 @@ public class HammerController : MonoBehaviour
     private float moveTimer = 0f;
     private PlayerInput playerInput;
     private InputAction moveAction;
+    private InputAction hitAction;
     private HoleNavigation holeNavigation;
 
     private void Awake ()
@@ -32,9 +33,16 @@ public class HammerController : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["MoveHammer"];
+        hitAction = playerInput.actions["Hit"];
         holeNavigation = GetComponent<HoleNavigation>();
-    }
 
+        hitAction.performed += ctx => OnHit();
+        //hitAction.canceled += ctx =>
+        //{
+
+        //}
+
+    }
 
     private void Update ()
     {

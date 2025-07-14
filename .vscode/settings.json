@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Topoqueado.sln"
+    "dotnet.defaultSolution": "Topoqueado.sln",
+    "dotnet.preferCSharpExtension": true
 }
