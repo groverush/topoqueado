@@ -1,20 +1,15 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HoleNavigation : MonoBehaviour
 {
     // === Holes ===
     [SerializeField] private List<GameObject> holes = new();
-    [SerializeField] private GameObject currentHole;
-    public GameObject GetCurrentHole ()
-    {
-        return currentHole;
-    }
-    public void SetCurrentHole ( GameObject newHole )
-    {
-        currentHole = newHole;
-    }
+    private GameObject currentHole;
 
+    // === Getter ===
+    public GameObject CurrentHole => currentHole;
 
     void Awake()
     {
@@ -69,14 +64,14 @@ public class HoleNavigation : MonoBehaviour
                 closestHole = hole;
                 shortestDistance = distance;
             }
+        }
 
-            // If a valid object was found, the highlight is updated
-            if (closestHole != null)
-            {
-                RemoveHighlight(currentHole);
-                currentHole = closestHole;
-                Highlight(currentHole);
-            }
+        // If a valid object was found, the highlight is updated
+        if (closestHole != null)
+        {
+            RemoveHighlight(currentHole);
+            currentHole = closestHole;
+            Highlight(currentHole);
         }
     }
 

@@ -119,9 +119,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5459700220173648250}
-  - component: {fileID: 3804716645117521673}
   - component: {fileID: 1551025636103226626}
-  - component: {fileID: 4121276376405616507}
+  - component: {fileID: 1785807129030517438}
+  - component: {fileID: 3804716645117521673}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -145,6 +145,49 @@ Transform:
   - {fileID: 7470941558781572780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1551025636103226626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveCooldown: 0.5
+  hammerHead: {fileID: 6489626391347864345}
+  hammerVisual: {fileID: 6476226649848543444}
+  hammerRestPosition: {x: 0, y: 2, z: -5}
+  hitOffset: {x: 0, y: 3, z: -3}
+  initialHammerAngle: 0
+  hitAngle: 90
+  hitDownDuration: 0.1
+  hitPause: 0.2
+--- !u!114 &1785807129030517438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3804716645117521673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,52 +322,6 @@ MonoBehaviour:
   m_DefaultActionMap: Hammer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1551025636103226626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3633769059094823161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveStep: 1.5
-  moveDuration: 0.2
-  repeatDelay: 0.2
-  moveCooldown: 0.5
-  hammerHead: {fileID: 6489626391347864345}
-  hammerRestPosition: {x: 0, y: 2, z: -5}
-  hitOffset: {x: 0, y: 3, z: -3}
-  initialHammerAngle: 20
-  hitAngle: 90
-  hitDownDuration: 0.1
-  hitPause: 0.2
---- !u!114 &4121276376405616507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3633769059094823161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentHole: {fileID: 0}
 --- !u!1 &4280050123649858947
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,11 +398,10 @@ GameObject:
   - component: {fileID: 4012851352268627985}
   - component: {fileID: 1652953641058728222}
   - component: {fileID: 2226202502068702916}
-  - component: {fileID: 6937210510159761323}
   - component: {fileID: 613986020572196082}
   m_Layer: 0
   m_Name: Hammer Head
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,29 +474,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6937210510159761323
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7064202947558811362}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!65 &613986020572196082
 BoxCollider:
   m_ObjectHideFlags: 0

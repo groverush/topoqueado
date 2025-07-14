@@ -5,13 +5,11 @@ using System.Collections;
 public class HammerController : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float moveStep = 1.5f; // Distance the hammer moves per input step
-    [SerializeField] private float moveDuration = 0.1f; // Duration of each movement
-    [SerializeField] private float repeatDelay = 0.2f; // Delay between repeated movements
     [SerializeField] private float moveCooldown = 0.1f; // Delay before fade out
 
     [Header("Hammer Settings")]
     [SerializeField] private Transform hammerHead;
+    [SerializeField] private GameObject hammerVisual; 
     [SerializeField] private Vector3 hammerRestPosition = new Vector3(0f, 2f, 0f); // Ajusta valores por defecto
     [SerializeField] private Vector3 hitOffset = new Vector3(0f, 0f, 0f); // ← Ajustable desde el editor
     [SerializeField] private float initialHammerAngle = -90f; // Starting rotation angle
@@ -23,7 +21,6 @@ public class HammerController : MonoBehaviour
     private float moveTimer = 0f;
     private PlayerInput playerInput;
     private InputAction moveAction;
-    private InputAction hitAction;
     private HoleNavigation holeNavigation;
 
     private void Awake ()
@@ -33,22 +30,15 @@ public class HammerController : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["MoveHammer"];
-        hitAction = playerInput.actions["Hit"];
         holeNavigation = GetComponent<HoleNavigation>();
-
-        hitAction.performed += ctx => OnHit();
-        //hitAction.canceled += ctx =>
-        //{
-
-        //}
-
     }
+
 
     private void Update ()
     {
         moveTimer += Time.deltaTime;
         Vector2 movementHammer = moveAction.ReadValue<Vector2>();
-        //Debug.Log("Se esta presionando el boton" + movementHammer);
+
         if (movementHammer != Vector2.zero && moveTimer >= moveCooldown)
         {
             holeNavigation.SelectHole(movementHammer, Vector3.right, Vector3.forward);
@@ -68,7 +58,7 @@ public class HammerController : MonoBehaviour
     {
         isHitting = true;
 
-        Vector3 holePos = holeNavigation.GetCurrentHole().transform.position;
+        Vector3 holePos = holeNavigation.CurrentHole.transform.position;
         Vector3 startPos = hammerRestPosition;
         Vector3 targetPos = new Vector3(holePos.x, startPos.y, holePos.z) + hitOffset;
 
@@ -119,6 +109,4 @@ public class HammerController : MonoBehaviour
 
         isHitting = false;
     }
-
-
 }
