@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &19971863 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3804716645117521673, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+  m_PrefabInstance: {fileID: 1842803692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &76609658
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +930,7 @@ MonoBehaviour:
   isGameActive: 0
   timeoutPanel: {fileID: 1363759627}
   timeLeftText: {fileID: 229622767}
-  gameTime: 20
+  gameTime: 60
 --- !u!4 &579490662
 Transform:
   m_ObjectHideFlags: 0
@@ -1362,6 +1373,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1080816201 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6760297994011002734, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+  m_PrefabInstance: {fileID: 1892870692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1099903055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1481,6 +1503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1105125865}
   - component: {fileID: 1105125864}
+  - component: {fileID: 1105125866}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1516,6 +1539,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1105125866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105125863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93737f5f4c5b2d84db62fa98ec717512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moleInput: {fileID: 1080816201}
+  hammerInput: {fileID: 19971863}
 --- !u!1 &1213747278 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6525243042915170649, guid: 1bcbef3c13a5b5347bef91496331dad0, type: 3}
@@ -1783,6 +1820,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1551025636103226626, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: moveCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1551025636103226626, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: hammerRestPosition.z
       value: -5.3
       objectReference: {fileID: 0}
@@ -1833,6 +1874,14 @@ PrefabInstance:
     - target: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804716645117521673, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3804716645117521673, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard
       objectReference: {fileID: 0}
     - target: {fileID: 4280050123649858947, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_Layer
@@ -2053,6 +2102,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mole
       objectReference: {fileID: 0}
+    - target: {fileID: 6760297994011002734, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Keyboard
+      objectReference: {fileID: 0}
     - target: {fileID: 6762710230592769509, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2095,6 +2148,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7221087180848524453, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
       propertyPath: popOutCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7221087180848524453, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+      propertyPath: movementCooldown
       value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
