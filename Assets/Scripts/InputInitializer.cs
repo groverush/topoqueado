@@ -20,4 +20,4 @@ public class InputInitializer : MonoBehaviour
             hammerInput.SwitchCurrentControlScheme("Keyboard", keyboard);
         }
     }
-}GUITargetAttribute stat
+}
