@@ -5,19 +5,55 @@ using UnityEngine;
 public class HoleNavigation : MonoBehaviour
 {
     // === Holes ===
-    [SerializeField] private List<GameObject> holes = new();
+    private List<GameObject> holes = new();
+    private enum HoleType { Hammer, Mole };
+    [SerializeField] private HoleType currentHoleType;
     private GameObject currentHole;
 
-    // === Getter ===
+    // === Properties ===
     public GameObject CurrentHole => currentHole;
 
     public List<GameObject> Holes => holes;
 
     void Awake()
     {
+        InitializeHoleList();
+    }
+
+    private void InitializeHoleList()
+    {
+        if (currentHoleType == HoleType.Hammer)
+        {
+            // Search for hammer holes and add them to the list
+            Transform hammerHolesContainer = GameObject.Find("Box")?.transform.Find("HammerHoles");
+
+            if (hammerHolesContainer != null)
+            {
+                foreach (Transform hammerHole in hammerHolesContainer.transform)
+                {
+                    holes.Add(hammerHole.gameObject);
+                }
+            }
+        }
+        else
+        {
+            // Search for mole holes and add them to the list
+            Transform moleHolesContainer = GameObject.Find("Box")?.transform.Find("MoleHoles");
+
+            if (moleHolesContainer != null)
+            {
+                foreach (Transform moleHole in moleHolesContainer.transform)
+                {
+                    holes.Add(moleHole.gameObject);
+                }
+            }
+        }
+
+        // Select the center hole in the list as the current hole and highlight it 
         if (holes.Count > 0)
         {
-            currentHole = holes[0];
+            currentHole = holes[holes.Count / 2];
+            Highlight(currentHole);
         }
     }
 
@@ -109,5 +145,4 @@ public class HoleNavigation : MonoBehaviour
         int randomIndex = Random.Range(0, holes.Count);
         return holes[randomIndex];
     }
-
 }

@@ -7,7 +7,7 @@ public class MoleVisionPowerUp : BasePowerUp
 
     protected override void ApplyEffect ( HammerController hammer )
     {
-        Debug.Log("Activando visión de topo desde MoleVisionPowerUp");
-        hammer.EnableMoleVision(visionDuration, moleLayer);
+        Debug.Log("Activando vision de topo desde MoleVisionPowerUp");
+        //hammer.EnableMoleVision(visionDuration, moleLayer);
     }
 }
