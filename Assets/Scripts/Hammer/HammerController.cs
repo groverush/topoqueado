@@ -188,8 +188,6 @@ public class HammerController : MonoBehaviour
         }
     }
 
-
-
     private void HandleDoubleHitEnd ()
     {
         if (hammerCloneInstance != null)
@@ -200,5 +198,12 @@ public class HammerController : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter ( Collision collision )
+    {
+        if (collision.gameObject.CompareTag("Mole"))
+        {
+            Debug.Log("Colisiona con el topo!");
+        }
+    }
 
 }
