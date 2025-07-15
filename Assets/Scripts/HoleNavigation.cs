@@ -90,4 +90,15 @@ public class HoleNavigation : MonoBehaviour
             outline.enabled = false;
         }
     }
+    public GameObject GetRandomHoleExcluding ( GameObject excludedHole )
+    {
+        if (holes.Count <= 1) return null;
+
+        List<GameObject> availableHoles = new List<GameObject>(holes);
+        availableHoles.Remove(excludedHole);
+
+        int randomIndex = Random.Range(0, availableHoles.Count);
+        return availableHoles[randomIndex];
+    }
+
 }
