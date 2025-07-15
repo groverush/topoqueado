@@ -122,9 +122,11 @@ GameObject:
   - component: {fileID: 1551025636103226626}
   - component: {fileID: 1785807129030517438}
   - component: {fileID: 3804716645117521673}
+  - component: {fileID: 3521782735468675714}
+  - component: {fileID: 3677949868758869557}
   m_Layer: 0
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +144,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7470941558781572780}
+  - {fileID: 6489626391347864345}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1551025636103226626
@@ -157,15 +159,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCooldown: 0.5
-  hammerHead: {fileID: 6489626391347864345}
-  hammerVisual: {fileID: 6476226649848543444}
-  hammerRestPosition: {x: 0, y: 2, z: -5}
-  hitOffset: {x: 0, y: 3, z: -3}
-  initialHammerAngle: 0
+  moveCooldown: 0.3
+  hammerBase: {fileID: 6489626391347864345}
+  hammerRestPosition: {x: -0.1, y: 2, z: -6}
+  hitOffset: {x: -0.1, y: 1.5, z: -3}
+  initialHammerAngle: 10
   hitAngle: 90
   hitDownDuration: 0.1
   hitPause: 0.2
+  hammerPowerUps: {fileID: 3521782735468675714}
+  hammerClonePrefab: {fileID: 7996959156265978641, guid: 12b874ab52727c34696be741d1bb4efb, type: 3}
 --- !u!114 &1785807129030517438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,16 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holes:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  currentHoleType: 0
 --- !u!114 &3804716645117521673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,26 +296,54 @@ MonoBehaviour:
     m_ActionId: 4b8fd59d-ae3a-4b0a-99de-f89c5edef8af
     m_ActionName: Hammer/Move
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1551025636103226626}
-        m_TargetAssemblyTypeName: HammerController, Assembly-CSharp
-        m_MethodName: OnHit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 3e71d63e-dc89-4ee7-a574-59b12dceb351
     m_ActionName: Hammer/Hit
   m_NeverAutoSwitchControlSchemes: 1
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Hammer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3521782735468675714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42474d2840f15db4aac3429ed8e8f53c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doubleHitDuration: 5
+--- !u!54 &3677949868758869557
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3633769059094823161}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4280050123649858947
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,44 +369,12 @@ Transform:
   m_GameObject: {fileID: 4280050123649858947}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.073802, y: 0.65999985, z: -2.1885993}
+  m_LocalPosition: {x: -0.06619787, y: -1.9300001, z: -3.2885995}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1703442988494804837}
   - {fileID: 4012851352268627985}
-  m_Father: {fileID: 7470941558781572780}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6476226649848543444
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7470941558781572780}
-  m_Layer: 0
-  m_Name: HammerVisual
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7470941558781572780
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6476226649848543444}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.14, y: -2.59, z: -1.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6489626391347864345}
   m_Father: {fileID: 5459700220173648250}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7064202947558811362
