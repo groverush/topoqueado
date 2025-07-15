@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,6 +24,16 @@ public class MoleController : MonoBehaviour
     private float popOutTimer = 0f;
     private bool canPopOut = true;
     private Vector3 originalPosition;
+
+    // === Pop state ===
+    public enum PopStates { Hidden, Visible};
+    private PopStates currentPopState = PopStates.Hidden;
+
+    // === Events ===
+    public event Action OnMoleHit;
+
+    // === Properties ===
+    public PopStates CurrentPopState => currentPopState;
 
     // === Pop in / out transition ===
     // [SerializeField] private float popOutHeight = 0.5f;
@@ -75,7 +86,8 @@ public class MoleController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Hammer"))
         {
-            Debug.Log("Ouch!");
+            OnMoleHit?.Invoke(); // Notify CollisionManager
+
             PopIn();
 
             // Código provisional (se debe optimizar)
@@ -88,6 +100,7 @@ public class MoleController : MonoBehaviour
     private void PopIn()
     {
         transform.position = originalPosition;
+        currentPopState = PopStates.Hidden;
         canMove = true;
 
         // if (popRoutine != null) StopCoroutine(popRoutine);
@@ -99,6 +112,7 @@ public class MoleController : MonoBehaviour
     private void PopOut()
     {
         transform.position = holeNavigationScript.CurrentHole.transform.position;
+        currentPopState = PopStates.Visible;
         canMove = false;
 
         // if (popRoutine != null) StopCoroutine(popRoutine);

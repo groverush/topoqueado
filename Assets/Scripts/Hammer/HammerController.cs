@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System;
 
 public class HammerController : MonoBehaviour
 {
@@ -33,7 +34,10 @@ public class HammerController : MonoBehaviour
     private Coroutine moleVisionRoutine;
     private int originalCullingMask;
 
-    private void Awake ()
+    // === Events ===
+    public Action OnHammerHitAttempt;
+
+    private void Awake()
     {
         hammerBase.position = hammerRestPosition;
         hammerBase.localRotation = Quaternion.Euler(initialHammerAngle, 0f, 0f);
@@ -47,8 +51,8 @@ public class HammerController : MonoBehaviour
 
         if (hammerPowerUps == null)
             hammerPowerUps = GetComponent<HammerPowerUps>();
-        hammerPowerUps.OnDoubleHitEnd += HandleDoubleHitEnd;
 
+        hammerPowerUps.OnDoubleHitEnd += HandleDoubleHitEnd;
     }
 
     private void Update ()
@@ -76,7 +80,10 @@ public class HammerController : MonoBehaviour
     public void OnHit ()
     {
         if (!isHitting)
+        {
+            OnHammerHitAttempt?.Invoke(); // Notify CollisionManager
             StartCoroutine(HitSequence());
+        }
     }
 
     private IEnumerator HitSequence ()
@@ -127,8 +134,6 @@ public class HammerController : MonoBehaviour
 
         isHitting = false;
     }
-
-
 
     private IEnumerator HitAnimation ( GameObject hole )
     {
@@ -226,14 +231,4 @@ public class HammerController : MonoBehaviour
     //    hammerCamera.cullingMask = originalCullingMask;
     //    Debug.Log("Visión topo desactivada");
     //}
-
-
-    void OnCollisionEnter ( Collision collision )
-    {
-        if (collision.gameObject.CompareTag("Mole"))
-        {
-            Debug.Log("Colisiona con el topo!");
-        }
-    }
-
 }
