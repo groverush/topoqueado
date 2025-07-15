@@ -5,9 +5,9 @@ using UnityEngine;
 public class PowerUpSpawner : MonoBehaviour
 {
     [SerializeField] private BasePowerUp[] powerUpPrefabs;
-    [SerializeField] private List<Transform> spawnPoints = new List<Transform>();
     [SerializeField] private float spawnInterval = 10f;
     [SerializeField] private HammerPowerUps hammerPowerUps; // Asignar desde inspector
+    [SerializeField] private HoleNavigation holeNavigationScript;
 
     private Coroutine spawnRoutine;
     private BasePowerUp currentPowerUp;
@@ -73,12 +73,11 @@ public class PowerUpSpawner : MonoBehaviour
 
     private void SpawnPowerUp ()
     {
-        if (powerUpPrefabs.Length == 0 || spawnPoints.Count == 0) return;
+        if (powerUpPrefabs.Length == 0 || holeNavigationScript.Holes.Count == 0) return;
 
         int randomPrefabIndex = Random.Range(0, powerUpPrefabs.Length);
-        int randomPointIndex = Random.Range(0, spawnPoints.Count);
 
-        BasePowerUp newPowerUp = Instantiate(powerUpPrefabs[randomPrefabIndex], spawnPoints[randomPointIndex].position, Quaternion.identity);
+        BasePowerUp newPowerUp = Instantiate(powerUpPrefabs[randomPrefabIndex], holeNavigationScript.GetRandomHole().transform.position, Quaternion.identity);
         currentPowerUp = newPowerUp;
 
         newPowerUp.OnCollected += HandlePowerUpCollected;

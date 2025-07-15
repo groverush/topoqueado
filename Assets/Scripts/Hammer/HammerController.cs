@@ -30,6 +30,9 @@ public class HammerController : MonoBehaviour
     private InputAction hitAction;
     private HoleNavigation holeNavigation;
 
+    private Coroutine moleVisionRoutine;
+    private int originalCullingMask;
+
     private void Awake ()
     {
         hammerBase.position = hammerRestPosition;
@@ -197,6 +200,33 @@ public class HammerController : MonoBehaviour
             hammerCloneInstance = null;
         }
     }
+
+    //public void EnableMoleVision ( float duration, LayerMask moleLayer )
+    //{
+    //    if (moleVisionRoutine != null)
+    //        StopCoroutine(moleVisionRoutine);
+
+    //    moleVisionRoutine = StartCoroutine(MoleVisionRoutine(duration, moleLayer));
+    //}
+
+    //private IEnumerator MoleVisionRoutine ( float duration, LayerMask moleLayer )
+    //{
+    //    originalCullingMask = hammerCamera.cullingMask; // hammerCamera ya debería estar referenciado
+
+    //    hammerCamera.cullingMask |= moleLayer.value;
+    //    float remainingTime = duration;
+
+    //    while (remainingTime > 0f)
+    //    {
+    //        Debug.Log($"Visión topo activa: {remainingTime:F1}s restantes");
+    //        remainingTime -= 1f;
+    //        yield return new WaitForSeconds(1f);
+    //    }
+
+    //    hammerCamera.cullingMask = originalCullingMask;
+    //    Debug.Log("Visión topo desactivada");
+    //}
+
 
     void OnCollisionEnter ( Collision collision )
     {

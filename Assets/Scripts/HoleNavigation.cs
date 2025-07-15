@@ -11,6 +11,8 @@ public class HoleNavigation : MonoBehaviour
     // === Getter ===
     public GameObject CurrentHole => currentHole;
 
+    public List<GameObject> Holes => holes;
+
     void Awake()
     {
         if (holes.Count > 0)
@@ -99,6 +101,13 @@ public class HoleNavigation : MonoBehaviour
 
         int randomIndex = Random.Range(0, availableHoles.Count);
         return availableHoles[randomIndex];
+    }
+    public GameObject GetRandomHole ()
+    {
+        if (holes.Count <= 1) return null;
+
+        int randomIndex = Random.Range(0, holes.Count);
+        return holes[randomIndex];
     }
 
 }
