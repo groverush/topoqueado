@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System;
 
 public class HammerController : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class HammerController : MonoBehaviour
     private InputAction moveAction;
     private HoleNavigation holeNavigation;
 
-    private void Awake ()
+    // === Events ===
+    public Action OnHammerHitAttempt;
+
+    private void Awake()
     {
         hammerHead.position = hammerRestPosition;
         hammerHead.localRotation = Quaternion.Euler(initialHammerAngle, 0f, 0f);
@@ -50,7 +54,10 @@ public class HammerController : MonoBehaviour
     public void OnHit ()
     {
         if (!isHitting)
+        {
+            OnHammerHitAttempt?.Invoke(); // Notify CollisionManager
             StartCoroutine(HitAnimation());
+        }
     }
 
     // Full hit animation flow, including fade in/out
