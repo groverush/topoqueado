@@ -11,8 +11,8 @@ public class CollisionManager : MonoBehaviour
     private bool isHitValidate = false;
 
     // === Events ===
-    public event Action OnHitSuccess;
-    public event Action OnHitMiss;
+    public event Action<HammerController> OnHitSuccess;
+    public event Action<MoleController> OnHitMiss;
 
     void Awake()
     {
@@ -27,7 +27,7 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
-    private void RestartState()
+    private void ResetState()
     {
         isHitValidate = true;
         CancelInvoke(nameof(RegisterHitFailure));
@@ -52,7 +52,7 @@ public class CollisionManager : MonoBehaviour
         {
             Debug.Log("✅ ¡Golpe acertado!");
 
-            OnHitSuccess?.Invoke();
+            OnHitSuccess?.Invoke(hammerController);
             isHitValidate = true;
         }
     }
@@ -63,8 +63,8 @@ public class CollisionManager : MonoBehaviour
         if (!isHitValidate)
         {
             Debug.Log("❌ Golpe fallido");
-
-            OnHitMiss?.Invoke();
+            
+            OnHitMiss?.Invoke(moleController);
             isHitValidate = true;
         }
     }

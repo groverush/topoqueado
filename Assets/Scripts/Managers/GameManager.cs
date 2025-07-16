@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
-    // === Manager references ===
+    // === Managers ===
     [Header("Managers")]
     [SerializeField] private UIManager uiManager;
     [SerializeField] private SplitScreenManager splitScreenManager;
