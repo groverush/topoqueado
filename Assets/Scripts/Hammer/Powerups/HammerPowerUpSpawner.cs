@@ -14,7 +14,7 @@ public class HammerPowerUpSpawner : MonoBehaviour
     private void Start ()
     {
         hammerPowerUpsManager.OnDoubleHitEnd += ResumeSpawning;
-        hammerPowerUpsManager.OnMoleVisionEnd += ResumeSpawning;
+        hammerPowerUpsManager.OnHammerVisionEnd += ResumeSpawning;
         StartSpawning();
     }
 
@@ -39,7 +39,7 @@ public class HammerPowerUpSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            if (hammerPowerUpsManager.IsDoubleHitActive || hammerPowerUpsManager.IsMoleVisionActive)
+            if (hammerPowerUpsManager.IsDoubleHitActive || hammerPowerUpsManager.IsHammerVisionActive)
             {
                 StopSpawning();
                 yield break;
@@ -54,7 +54,7 @@ public class HammerPowerUpSpawner : MonoBehaviour
 
     private void ResumeSpawning ()
     {
-        if (!hammerPowerUpsManager.IsDoubleHitActive && !hammerPowerUpsManager.IsMoleVisionActive)
+        if (!hammerPowerUpsManager.IsDoubleHitActive && !hammerPowerUpsManager.IsHammerVisionActive)
         {
             StartSpawning();
         }
@@ -83,6 +83,6 @@ public class HammerPowerUpSpawner : MonoBehaviour
     private void OnDestroy ()
     {
         hammerPowerUpsManager.OnDoubleHitEnd -= ResumeSpawning;
-        hammerPowerUpsManager.OnMoleVisionEnd -= ResumeSpawning;
+        hammerPowerUpsManager.OnHammerVisionEnd -= ResumeSpawning;
     }
 }

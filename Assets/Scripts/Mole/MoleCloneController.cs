@@ -3,41 +3,48 @@ using UnityEngine;
 
 public class MoleCloneController : MonoBehaviour
 {
-    [SerializeField] public Transform moleBase;
+    [SerializeField] private Transform moleBase;
 
-    public IEnumerator PlayPopOutAnimation ( Vector3 targetPosition, float initialAngle, float popOutAngle, float moveDuration, float rotationDuration )
+    private Coroutine currentAnimationRoutine;
+    private bool isAbilityUnlocked = false;
+    private bool isVisible = false;
+
+    public void UnlockCloneAbility ()
     {
-        // Movimiento hacia el agujero
-        yield return MoveToPosition(targetPosition, moveDuration);
-
-        // Rotación simulando aparición
-        yield return RotateMole(initialAngle, popOutAngle, rotationDuration);
-
-        // Pequeña pausa si se quiere
-        yield return new WaitForSeconds(0.1f);
-
-        // Rotación simulando esconderse
-        yield return RotateMole(popOutAngle, initialAngle, rotationDuration);
-
-        // Regreso a posición de descanso (opcional)
-        yield return MoveToPosition(targetPosition, moveDuration);
-
+        isAbilityUnlocked = true;
         gameObject.SetActive(false);
+        isVisible = false;
     }
 
-    private IEnumerator MoveToPosition ( Vector3 targetPosition, float duration )
+    public void ShowAtPosition ( Vector3 targetPosition )
     {
-        Vector3 startPosition = transform.position;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+        if (!isAbilityUnlocked || isVisible) return;
 
         transform.position = targetPosition;
+        gameObject.SetActive(true);
+
+        if (currentAnimationRoutine != null)
+            StopCoroutine(currentAnimationRoutine);
+
+        currentAnimationRoutine = StartCoroutine(RotateMole(-20f, 20f, 0.2f));
+        isVisible = true;
+    }
+
+    public void HideClone ()
+    {
+        if (!isAbilityUnlocked || !isVisible) return;
+
+        if (currentAnimationRoutine != null)
+            StopCoroutine(currentAnimationRoutine);
+
+        currentAnimationRoutine = StartCoroutine(HideRoutine());
+    }
+
+    private IEnumerator HideRoutine ()
+    {
+        yield return RotateMole(20f, -20f, 0.2f);
+        gameObject.SetActive(false);
+        isVisible = false;
     }
 
     private IEnumerator RotateMole ( float fromAngle, float toAngle, float duration )
@@ -56,9 +63,6 @@ public class MoleCloneController : MonoBehaviour
         moleBase.localRotation = endRot;
     }
 
-    public void DeactivateClone ()
-    {
-        if (gameObject != null)
-            gameObject.SetActive(false);
-    }
+    public bool IsAbilityUnlocked => isAbilityUnlocked;
+    public bool IsVisible => isVisible;
 }

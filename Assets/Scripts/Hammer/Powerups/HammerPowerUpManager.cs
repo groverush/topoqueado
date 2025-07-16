@@ -12,19 +12,22 @@ public class HammerPowerUpManager : MonoBehaviour
     [Header("Mole Vision Settings")]
     [SerializeField] private Camera hammerCamera;
     [SerializeField] private LayerMask moleLayer;
-    [SerializeField] private float moleVisionDuration = 5f;
+    [SerializeField] private float hammerVisionDuration = 5f;
 
     [HideInInspector] public HammerCloneController HammerCloneInstance { get; private set; }
 
     private Coroutine doubleHitRoutine;
-    private Coroutine moleVisionRoutine;
+    private Coroutine hammerVisionRoutine;
     private int originalCullingMask;
 
     public bool IsDoubleHitActive { get; private set; }
-    public bool IsMoleVisionActive { get; private set; }
+    public bool IsHammerVisionActive { get; private set; }
+
+    public float DoubleHitTimeRemaining { get; private set; }
+    public float HammerVisionTimeRemaining { get; private set; }
 
     public event Action OnDoubleHitEnd;
-    public event Action OnMoleVisionEnd;
+    public event Action OnHammerVisionEnd;
 
     public bool HasValidHammerClone ()
     {
@@ -40,32 +43,23 @@ public class HammerPowerUpManager : MonoBehaviour
             CreateHammerClone();
 
         SyncHammerClone(hammerRestPosition, initialHammerAngle);
-        doubleHitRoutine = StartCoroutine(DoubleHitCoroutine());
-    }
 
-    private IEnumerator DoubleHitCoroutine ()
-    {
+        doubleHitRoutine = StartCoroutine(AbilityTimer(doubleHitDuration,
+            time => DoubleHitTimeRemaining = time,
+            () =>
+            {
+                if (HammerCloneInstance != null)
+                {
+                    HammerCloneInstance.DeactivateClone();
+                    Destroy(HammerCloneInstance.gameObject, 0.5f);
+                    HammerCloneInstance = null;
+                }
+                IsDoubleHitActive = false;
+                DoubleHitTimeRemaining = 0f;
+                OnDoubleHitEnd?.Invoke();
+            }));
+
         IsDoubleHitActive = true;
-
-        float remainingTime = doubleHitDuration;
-        while (remainingTime > 0f)
-        {
-            Debug.Log($"[DoubleHit] Tiempo restante: {remainingTime:F1} segundos");
-            yield return new WaitForSeconds(1f);
-            remainingTime -= 1f;
-        }
-
-        if (HammerCloneInstance != null)
-        {
-            HammerCloneInstance.DeactivateClone();
-            yield return new WaitForSeconds(0.5f);
-            if (HammerCloneInstance != null)
-                Destroy(HammerCloneInstance.gameObject);
-            HammerCloneInstance = null;
-        }
-
-        IsDoubleHitActive = false;
-        OnDoubleHitEnd?.Invoke();
     }
 
     private void CreateHammerClone ()
@@ -111,24 +105,51 @@ public class HammerPowerUpManager : MonoBehaviour
         return randomHole != currentHole ? randomHole : null;
     }
 
-    public void ActivateMoleVision ()
+    public void ActivateHammerVision ()
     {
-        if (moleVisionRoutine != null)
-            StopCoroutine(moleVisionRoutine);
+        if (hammerVisionRoutine != null)
+            StopCoroutine(hammerVisionRoutine);
 
-        moleVisionRoutine = StartCoroutine(MoleVisionCoroutine());
-    }
+        hammerVisionRoutine = StartCoroutine(AbilityTimer(hammerVisionDuration,
+            time => HammerVisionTimeRemaining = time,
+            () =>
+            {
+                hammerCamera.cullingMask = originalCullingMask;
+                IsHammerVisionActive = false;
+                HammerVisionTimeRemaining = 0f;
+                OnHammerVisionEnd?.Invoke();
+            }));
 
-    private IEnumerator MoleVisionCoroutine ()
-    {
-        IsMoleVisionActive = true;
+        IsHammerVisionActive = true;
         originalCullingMask = hammerCamera.cullingMask;
         hammerCamera.cullingMask |= moleLayer.value;
+    }
 
-        yield return new WaitForSeconds(moleVisionDuration);
+    private IEnumerator AbilityTimer ( float duration, Action<float> onTimeChange, Action onComplete )
+    {
+        float timeRemaining = duration;
+        float lastReportedSeconds = Mathf.Ceil(timeRemaining);
 
-        hammerCamera.cullingMask = originalCullingMask;
-        IsMoleVisionActive = false;
-        OnMoleVisionEnd?.Invoke();
+        while (timeRemaining > 0f)
+        {
+            yield return null;
+            timeRemaining -= Time.deltaTime;
+            onTimeChange.Invoke(timeRemaining);
+
+            float currentSeconds = Mathf.Ceil(timeRemaining);
+            if (currentSeconds != lastReportedSeconds)
+            {
+                Debug.Log($"[PowerUp Timer] Tiempo restante: {currentSeconds} segundos");
+                lastReportedSeconds = currentSeconds;
+            }
+        }
+
+        onTimeChange.Invoke(0f);
+        onComplete?.Invoke();
+    }
+
+    public bool IsAnyPowerUpActive ()
+    {
+        return IsDoubleHitActive || IsHammerVisionActive;
     }
 }

@@ -7,7 +7,7 @@ public class HammerVisionPowerUp : BasePowerUp
         var hammer = target.GetComponent<HammerController>();
         if (hammer != null && hammer.PowerUpManager != null)
         {
-            hammer.PowerUpManager.ActivateMoleVision();
+            hammer.PowerUpManager.ActivateHammerVision();
             Debug.Log("Hammer Vision PowerUp activado.");
         }
     }

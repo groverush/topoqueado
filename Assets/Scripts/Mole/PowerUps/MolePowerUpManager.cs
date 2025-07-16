@@ -6,109 +6,139 @@ public class MolePowerUpManager : MonoBehaviour
 {
     [Header("Clone Settings")]
     [SerializeField] private GameObject moleClonePrefab;
-    [SerializeField] private float cloneDuration = 5f;
     [SerializeField] private Vector3 cloneOffset = Vector3.zero;
     [SerializeField] private HoleNavigation holeNavigation;
+    private MoleCloneController moleCloneInstance;
+    private Vector3 lastClonePosition;
+    private Coroutine cloneTimerRoutine;
 
     [Header("Mole Vision Settings")]
     [SerializeField] private Camera moleCamera;
-    [SerializeField] private LayerMask hammerLayer;
-    [SerializeField] private float visionDuration = 5f;
-
-    [HideInInspector] public MoleCloneController MoleCloneInstance { get; private set; }
-
-    private Coroutine cloneRoutine;
-    private Coroutine visionRoutine;
+    [SerializeField] private LayerMask moleLayer;
+    [SerializeField] private float moleVisionDuration = 5f;
+    private Coroutine moleVisionRoutine;
     private int originalCullingMask;
 
-    public bool IsCloneActive { get; private set; }
-    public bool IsVisionActive { get; private set; }
+    public bool IsMoleVisionActive { get; private set; }
+    public bool IsCloneAbilityUnlocked { get; private set; } = false;
 
+    public float MoleVisionTimeRemaining { get; private set; } = 0f;
+    public float CloneAbilityTimeRemaining { get; private set; } = 0f;
+
+    public event Action OnMoleVisionEnd;
     public event Action OnCloneEnd;
-    public event Action OnVisionEnd;
 
-    public void ActivateClone ()
+    public void UnlockCloneAbility ()
     {
-        if (cloneRoutine != null)
-            StopCoroutine(cloneRoutine);
-
-        if (MoleCloneInstance == null)
+        if (moleCloneInstance == null)
             CreateMoleClone();
 
-        SyncMoleClone();
-        cloneRoutine = StartCoroutine(CloneCoroutine());
-    }
+        moleCloneInstance.UnlockCloneAbility();
+        IsCloneAbilityUnlocked = true;
 
-    private IEnumerator CloneCoroutine ()
-    {
-        IsCloneActive = true;
-
-        float remainingTime = cloneDuration;
-        while (remainingTime > 0f)
-        {
-            Debug.Log($"[Clone] Tiempo restante: {remainingTime:F1} segundos");
-            yield return new WaitForSeconds(1f);
-            remainingTime -= 1f;
-        }
-
-        DestroyMoleClone();
-        IsCloneActive = false;
-        OnCloneEnd?.Invoke();
+        if (cloneTimerRoutine != null) StopCoroutine(cloneTimerRoutine);
+        cloneTimerRoutine = StartCoroutine(AbilityTimer(10f, // Ajusta el tiempo del clone aquí
+            time => CloneAbilityTimeRemaining = time,
+            () =>
+            {
+                IsCloneAbilityUnlocked = false;
+                CloneAbilityTimeRemaining = 0f;
+                HideClone();
+                OnCloneEnd?.Invoke();
+            }));
     }
 
     private void CreateMoleClone ()
     {
         GameObject cloneObj = Instantiate(moleClonePrefab);
-        MoleCloneInstance = cloneObj.GetComponent<MoleCloneController>();
-        MoleCloneInstance.gameObject.SetActive(false);
+        moleCloneInstance = cloneObj.GetComponent<MoleCloneController>();
+        moleCloneInstance.gameObject.SetActive(false);
     }
 
-    public void SyncMoleClone ()
+    public void TryShowClone ( Vector3 moleCurrentPosition )
     {
-        if (MoleCloneInstance != null && holeNavigation != null)
+        if (!IsCloneAbilityUnlocked || moleCloneInstance == null || holeNavigation == null) return;
+        if (moleCloneInstance.IsVisible) return;
+
+        GameObject randomHole = null;
+        int attempts = 10;
+
+        while (attempts > 0)
         {
-            GameObject randomHole = holeNavigation.GetRandomHole();
-            if (randomHole != null)
-            {
-                MoleCloneInstance.transform.position = randomHole.transform.position + cloneOffset;
-                MoleCloneInstance.transform.rotation = Quaternion.identity;
-                MoleCloneInstance.gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.LogWarning("No hay agujeros disponibles para el clon.");
-            }
+            randomHole = holeNavigation.GetRandomHole();
+            if (randomHole != null && Vector3.Distance(randomHole.transform.position, moleCurrentPosition) > 0.1f)
+                break;
+            attempts--;
+        }
+
+        if (randomHole != null)
+        {
+            lastClonePosition = randomHole.transform.position + cloneOffset;
+            moleCloneInstance.ShowAtPosition(lastClonePosition);
+        }
+        else
+        {
+            Debug.LogWarning("No hay agujeros válidos para el clon.");
         }
     }
 
-    private void DestroyMoleClone ()
+    public void HideClone ()
     {
-        if (MoleCloneInstance != null)
+        if (IsCloneAbilityUnlocked && moleCloneInstance != null)
         {
-            MoleCloneInstance.DeactivateClone();
-            Destroy(MoleCloneInstance.gameObject);
-            MoleCloneInstance = null;
+            moleCloneInstance.HideClone();
         }
     }
 
     public void ActivateMoleVision ()
     {
-        if (visionRoutine != null)
-            StopCoroutine(visionRoutine);
-
-        visionRoutine = StartCoroutine(VisionCoroutine());
+        if (moleVisionRoutine != null) StopCoroutine(moleVisionRoutine);
+        moleVisionRoutine = StartCoroutine(MoleVisionCoroutine());
     }
 
-    private IEnumerator VisionCoroutine ()
+    private IEnumerator MoleVisionCoroutine ()
     {
-        IsVisionActive = true;
+        IsMoleVisionActive = true;
+        MoleVisionTimeRemaining = moleVisionDuration;
         originalCullingMask = moleCamera.cullingMask;
-        moleCamera.cullingMask |= hammerLayer.value;
+        moleCamera.cullingMask |= moleLayer.value;
 
-        yield return new WaitForSeconds(visionDuration);
+        yield return AbilityTimer(moleVisionDuration,
+            time => MoleVisionTimeRemaining = time,
+            () =>
+            {
+                moleCamera.cullingMask = originalCullingMask;
+                IsMoleVisionActive = false;
+                MoleVisionTimeRemaining = 0f;
+                OnMoleVisionEnd?.Invoke();
+            });
+    }
 
-        moleCamera.cullingMask = originalCullingMask;
-        IsVisionActive = false;
-        OnVisionEnd?.Invoke();
+    private IEnumerator AbilityTimer ( float duration, Action<float> onTimeChange, Action onComplete )
+    {
+        float timeRemaining = duration;
+        float lastReportedSeconds = Mathf.Ceil(timeRemaining);
+
+        while (timeRemaining > 0f)
+        {
+            yield return null;
+            timeRemaining -= Time.deltaTime;
+            onTimeChange.Invoke(timeRemaining);
+
+            float currentSeconds = Mathf.Ceil(timeRemaining);
+            if (currentSeconds != lastReportedSeconds)
+            {
+                Debug.Log($"[PowerUp Timer] Tiempo restante: {currentSeconds} segundos");
+                lastReportedSeconds = currentSeconds;
+            }
+        }
+
+        onTimeChange.Invoke(0f);
+        onComplete?.Invoke();
+    }
+
+    public bool IsAnyPowerUpActive ()
+    {
+        return IsMoleVisionActive || IsCloneAbilityUnlocked;
     }
 }

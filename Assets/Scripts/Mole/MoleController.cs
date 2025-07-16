@@ -23,12 +23,17 @@ public class MoleController : MonoBehaviour
     private bool canPopOut = true;
     private Vector3 originalPosition;
 
+    [SerializeField] private Transform moleBase;
+    private Coroutine currentAnimationRoutine;
+
     public enum PopStates { Hidden, Visible };
     private PopStates currentPopState = PopStates.Hidden;
 
     public event Action OnMoleHit;
     public PopStates CurrentPopState => currentPopState;
     public MolePowerUpManager MolePowerUpManager => molePowerUpManager;
+
+    private bool wasPopOutPressedLastFrame = false;
 
     private void Awake ()
     {
@@ -39,11 +44,6 @@ public class MoleController : MonoBehaviour
         moveAction = playerInput.actions["MoveMole"];
         popOutAction = playerInput.actions["PopOut"];
         popOutAction.canceled += OnPopOutReleased;
-
-        if (molePowerUpManager == null)
-        {
-            Debug.LogWarning("MolePowerUpManager no está asignado en el inspector.");
-        }
     }
 
     private void OnDestroy ()
@@ -62,14 +62,21 @@ public class MoleController : MonoBehaviour
             movementTimer = 0;
         }
 
-        if (canPopOut && popOutAction.ReadValue<float>() > 0)
+        float popOutValue = popOutAction.ReadValue<float>();
+        bool isPopOutPressed = popOutValue > 0;
+
+        if (canPopOut && isPopOutPressed && !wasPopOutPressedLastFrame)
         {
             PopOut();
+            molePowerUpManager.TryShowClone(holeNavigationScript.CurrentHole.transform.position);
         }
-        else if (currentPopState == PopStates.Visible)
+        else if (!isPopOutPressed && wasPopOutPressedLastFrame)
         {
             PopIn();
+            molePowerUpManager.HideClone();
         }
+
+        wasPopOutPressedLastFrame = isPopOutPressed;
     }
 
     private void OnCollisionEnter ( Collision collision )
@@ -78,6 +85,7 @@ public class MoleController : MonoBehaviour
         {
             OnMoleHit?.Invoke();
             PopIn();
+            molePowerUpManager.HideClone();
             CancelPopOutInput();
             canPopOut = false;
             popOutTimer = 0f;
@@ -85,18 +93,40 @@ public class MoleController : MonoBehaviour
         }
     }
 
+    private void PopOut ()
+    {
+        if (currentAnimationRoutine != null) StopCoroutine(currentAnimationRoutine);
+        currentAnimationRoutine = StartCoroutine(RotateMole(-20f, 20f, 0.2f));
+
+        transform.position = holeNavigationScript.CurrentHole.transform.position;
+        currentPopState = PopStates.Visible;
+        canMove = false;
+    }
+
     private void PopIn ()
     {
+        if (currentAnimationRoutine != null) StopCoroutine(currentAnimationRoutine);
+        currentAnimationRoutine = StartCoroutine(RotateMole(20f, -20f, 0.2f));
+
         transform.position = originalPosition;
         currentPopState = PopStates.Hidden;
         canMove = true;
     }
 
-    private void PopOut ()
+    private IEnumerator RotateMole ( float fromAngle, float toAngle, float duration )
     {
-        transform.position = holeNavigationScript.CurrentHole.transform.position;
-        currentPopState = PopStates.Visible;
-        canMove = false;
+        Quaternion startRot = Quaternion.Euler(fromAngle, 0f, 0f);
+        Quaternion endRot = Quaternion.Euler(toAngle, 0f, 0f);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            moleBase.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        moleBase.localRotation = endRot;
     }
 
     private void OnPopOutReleased ( InputAction.CallbackContext context )

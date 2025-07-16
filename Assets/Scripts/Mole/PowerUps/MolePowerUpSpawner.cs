@@ -13,8 +13,7 @@ public class MolePowerUpSpawner : MonoBehaviour
 
     private void Start ()
     {
-        molePowerUpManager.OnCloneEnd += ResumeSpawning;
-        molePowerUpManager.OnVisionEnd += ResumeSpawning;
+        molePowerUpManager.OnMoleVisionEnd += ResumeSpawning;
         StartSpawning();
     }
 
@@ -39,11 +38,8 @@ public class MolePowerUpSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            if (molePowerUpManager.IsCloneActive || molePowerUpManager.IsVisionActive)
-            {
-                StopSpawning();
-                yield break;
-            }
+            if (molePowerUpManager.IsAnyPowerUpActive())
+                continue;
 
             if (currentPowerUp == null)
             {
@@ -54,7 +50,7 @@ public class MolePowerUpSpawner : MonoBehaviour
 
     private void ResumeSpawning ()
     {
-        if (!molePowerUpManager.IsCloneActive && !molePowerUpManager.IsVisionActive)
+        if (!molePowerUpManager.IsAnyPowerUpActive())
         {
             StartSpawning();
         }
@@ -82,7 +78,6 @@ public class MolePowerUpSpawner : MonoBehaviour
 
     private void OnDestroy ()
     {
-        molePowerUpManager.OnCloneEnd -= ResumeSpawning;
-        molePowerUpManager.OnVisionEnd -= ResumeSpawning;
+        molePowerUpManager.OnMoleVisionEnd -= ResumeSpawning;
     }
 }
