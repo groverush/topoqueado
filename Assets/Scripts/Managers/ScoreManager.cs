@@ -5,7 +5,6 @@ public class ScoreManager : MonoBehaviour
 {
     // === Managers ===
     [SerializeField] private CollisionManager collisionManager;
-    [SerializeField] private UIManager uiManager;
 
     // === Score ===
     private int hammerScore = 0;
