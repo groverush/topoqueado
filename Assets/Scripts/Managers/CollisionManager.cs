@@ -63,7 +63,7 @@ public class CollisionManager : MonoBehaviour
         if (!isHitValidate)
         {
             Debug.Log("❌ Golpe fallido");
-
+            
             OnHitMiss?.Invoke(moleController);
             isHitValidate = true;
         }
