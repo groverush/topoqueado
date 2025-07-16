@@ -17,10 +17,10 @@ TagManager:
   - UIHammer
   - MoleLayer
   - HammerLayer
-  - 
-  - 
-  - 
-  - 
+  - MolePowerUp
+  - HammerPowerUp
+  - Mole
+  - Hammer
   - 
   - 
   - 

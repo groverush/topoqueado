@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2970414024925762102}
   - component: {fileID: 6836914728243071742}
   - component: {fileID: 2987605854938162376}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,9 +122,8 @@ GameObject:
   - component: {fileID: 1551025636103226626}
   - component: {fileID: 1785807129030517438}
   - component: {fileID: 3804716645117521673}
-  - component: {fileID: 3521782735468675714}
   - component: {fileID: 3677949868758869557}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hammer
   m_TagString: Hammer
   m_Icon: {fileID: 0}
@@ -159,16 +158,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveCooldown: 0.3
+  powerUpManager: {fileID: 0}
   hammerBase: {fileID: 6489626391347864345}
+  moveCooldown: 0.3
   hammerRestPosition: {x: -0.1, y: 2, z: -6}
-  hitOffset: {x: -0.1, y: 1.5, z: -3}
   initialHammerAngle: 10
   hitAngle: 90
   hitDownDuration: 0.1
   hitPause: 0.2
-  hammerPowerUps: {fileID: 3521782735468675714}
-  hammerClonePrefab: {fileID: 7996959156265978641, guid: 12b874ab52727c34696be741d1bb4efb, type: 3}
+  hitOffset: {x: -0.1, y: 1.5, z: -3}
 --- !u!114 &1785807129030517438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,19 +302,6 @@ MonoBehaviour:
   m_DefaultActionMap: Hammer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3521782735468675714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3633769059094823161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42474d2840f15db4aac3429ed8e8f53c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doubleHitDuration: 5
 --- !u!54 &3677949868758869557
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -353,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6489626391347864345}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +374,7 @@ GameObject:
   - component: {fileID: 1652953641058728222}
   - component: {fileID: 2226202502068702916}
   - component: {fileID: 613986020572196082}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hammer Head
   m_TagString: Hammer
   m_Icon: {fileID: 0}
