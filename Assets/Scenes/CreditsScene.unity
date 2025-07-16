@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 115383482}
   - component: {fileID: 115383481}
   m_Layer: 5
-  m_Name: GoBackButton
+  m_Name: MainMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1850875876}
         m_TargetAssemblyTypeName: SceneSwitchingManager, Assembly-CSharp
-        m_MethodName: OnGoBackButtonClicked
+        m_MethodName: OnMainMenuButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -918,6 +918,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a38d1ad2a0de6c479522cf638328e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slides: []
+  displayImage: {fileID: 0}
+  pausePanel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
 --- !u!1 &1955188563
 GameObject:
   m_ObjectHideFlags: 0
