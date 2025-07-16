@@ -1296,56 +1296,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160729581}
   m_CullTransparentMesh: 1
---- !u!1 &1165430769
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1165430771}
-  - component: {fileID: 1165430770}
-  m_Layer: 0
-  m_Name: MolePowerUpSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1165430770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165430769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a43def275860b414280c52edc5af5c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  molePowerUpPrefabs:
-  - {fileID: 5180985173064016535, guid: dbe743c2752e9604ba5b8c77ccd6b672, type: 3}
-  - {fileID: 7591234131441801337, guid: 916db73cdb8c6dc4593a4145e3211703, type: 3}
-  spawnInterval: 3
-  molePowerUpManager: {fileID: 1705534354}
-  holeNavigationScript: {fileID: 1552904221233401827}
---- !u!4 &1165430771
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165430769}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.278144, y: -2.8017292, z: -1.6267236}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1238379474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2068,10 +2018,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4198731528848026972, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4654796621952506289, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
       propertyPath: m_Name
       value: Mole
@@ -2241,14 +2187,6 @@ PrefabInstance:
       propertyPath: powerUpPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
-      propertyPath: 'powerUpPrefabs.Array.data[1]'
-      value: 
-      objectReference: {fileID: 7323623292540987315, guid: 24e87339b58a96f45b337c7292d1d180, type: 3}
-    - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
-      propertyPath: 'powerUpPrefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 674499656171042939, guid: dbe743c2752e9604ba5b8c77ccd6b672, type: 3}
     - target: {fileID: 7575135288945231926, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: m_Name
       value: 'HammerPowerUpSpawner '
@@ -2413,6 +2351,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78adfade15d3026479786fed155cd4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &8681736877379415821
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2308854431481232884, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: molePowerUpManager
+      value: 
+      objectReference: {fileID: 1705534354}
+    - target: {fileID: 2308854431481232884, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: holeNavigationScript
+      value: 
+      objectReference: {fileID: 1552904221233401827}
+    - target: {fileID: 6546297620252818735, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_Name
+      value: MolePowerUpSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.278144
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8017292
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.6267236
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6644205328470215303, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4340ab5c01a1f47448400fbcdf244f7d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2422,5 +2425,5 @@ SceneRoots:
   - {fileID: 2164704033707453365}
   - {fileID: 1076062662271633289}
   - {fileID: 4725713451403883436}
-  - {fileID: 1165430771}
+  - {fileID: 8681736877379415821}
   - {fileID: 3314093231200821638}
