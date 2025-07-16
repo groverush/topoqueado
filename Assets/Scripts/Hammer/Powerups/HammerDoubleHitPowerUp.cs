@@ -2,16 +2,13 @@ using UnityEngine;
 
 public class HammerDoubleHitPowerUp : BasePowerUp
 {
-    protected override void ApplyEffect ( HammerController hammer )
+    protected override void ApplyEffect ( GameObject target )
     {
-        if (hammer != null && hammer.PowerUpManager != null)
+        var hammer = target.GetComponent<HammerController>();
+        if (hammer != null)
         {
-            hammer.PowerUpManager.ActivateDoubleHit(
-                hammer.HammerBase,
-                hammer.HammerRestPosition,
-                hammer.InitialHammerAngle
-            );
-            Debug.Log("DoubleHitPowerUp: Activado desde el power-up.");
+            hammer.PowerUpManager.ActivateDoubleHit(hammer.HammerBase, hammer.HammerRestPosition, hammer.InitialHammerAngle);
+            Debug.Log("Double Hit PowerUp activado.");
         }
     }
 }

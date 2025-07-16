@@ -18,19 +18,31 @@ public abstract class BasePowerUp : MonoBehaviour
 
     private void OnTriggerEnter ( Collider other )
     {
-        if (other.CompareTag("Hammer") && !collected)
+        if (collected) return;
+
+        if (other.CompareTag("Hammer"))
         {
             HammerController hammer = other.GetComponent<HammerController>() ?? other.GetComponentInParent<HammerController>();
-
             if (hammer != null)
             {
-                ApplyEffect(hammer);
+                ApplyEffect(hammer.gameObject);
+                HandleCollected();
+                return;
+            }
+        }
+
+        if (other.CompareTag("Mole"))
+        {
+            MoleController mole = other.GetComponent<MoleController>() ?? other.GetComponentInParent<MoleController>();
+            if (mole != null)
+            {
+                ApplyEffect(mole.gameObject);
                 HandleCollected();
             }
         }
     }
 
-    protected abstract void ApplyEffect ( HammerController hammer );
+    protected abstract void ApplyEffect ( GameObject target );
 
     private void DestroyIfNotCollected ()
     {

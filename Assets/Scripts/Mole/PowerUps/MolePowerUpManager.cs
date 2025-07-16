@@ -8,6 +8,7 @@ public class MolePowerUpManager : MonoBehaviour
     [SerializeField] private GameObject moleClonePrefab;
     [SerializeField] private float cloneDuration = 5f;
     [SerializeField] private Vector3 cloneOffset = Vector3.zero;
+    [SerializeField] private HoleNavigation holeNavigation;
 
     [Header("Mole Vision Settings")]
     [SerializeField] private Camera moleCamera;
@@ -26,7 +27,7 @@ public class MolePowerUpManager : MonoBehaviour
     public event Action OnCloneEnd;
     public event Action OnVisionEnd;
 
-    public void ActivateClone ( Vector3 molePosition )
+    public void ActivateClone ()
     {
         if (cloneRoutine != null)
             StopCoroutine(cloneRoutine);
@@ -34,7 +35,7 @@ public class MolePowerUpManager : MonoBehaviour
         if (MoleCloneInstance == null)
             CreateMoleClone();
 
-        SyncMoleClone(molePosition);
+        SyncMoleClone();
         cloneRoutine = StartCoroutine(CloneCoroutine());
     }
 
@@ -62,13 +63,21 @@ public class MolePowerUpManager : MonoBehaviour
         MoleCloneInstance.gameObject.SetActive(false);
     }
 
-    public void SyncMoleClone ( Vector3 molePosition )
+    public void SyncMoleClone ()
     {
-        if (MoleCloneInstance != null)
+        if (MoleCloneInstance != null && holeNavigation != null)
         {
-            MoleCloneInstance.transform.position = molePosition + cloneOffset;
-            MoleCloneInstance.transform.rotation = Quaternion.identity;
-            MoleCloneInstance.gameObject.SetActive(true);
+            GameObject randomHole = holeNavigation.GetRandomHole();
+            if (randomHole != null)
+            {
+                MoleCloneInstance.transform.position = randomHole.transform.position + cloneOffset;
+                MoleCloneInstance.transform.rotation = Quaternion.identity;
+                MoleCloneInstance.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("No hay agujeros disponibles para el clon.");
+            }
         }
     }
 

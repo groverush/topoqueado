@@ -989,7 +989,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 353
+    m_Bits: 13665
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1296,6 +1296,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160729581}
   m_CullTransparentMesh: 1
+--- !u!1 &1165430769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1165430771}
+  - component: {fileID: 1165430770}
+  m_Layer: 0
+  m_Name: MolePowerUpSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1165430770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165430769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43def275860b414280c52edc5af5c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  molePowerUpPrefabs:
+  - {fileID: 5180985173064016535, guid: dbe743c2752e9604ba5b8c77ccd6b672, type: 3}
+  - {fileID: 7591234131441801337, guid: 916db73cdb8c6dc4593a4145e3211703, type: 3}
+  spawnInterval: 3
+  molePowerUpManager: {fileID: 1705534354}
+  holeNavigationScript: {fileID: 1552904221233401827}
+--- !u!4 &1165430771
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165430769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.278144, y: -2.8017292, z: -1.6267236}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1238379474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1758,7 +1808,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 673
+    m_Bits: 15009
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1794,6 +1844,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2640958044b66146bef4aba9f67f9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1705534354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5342169709987538546, guid: 553d29145ea6e4947bb2ed41ed9879f1, type: 3}
+  m_PrefabInstance: {fileID: 3314093231200821638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125541d6a5432ff40b95b73718ae7a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1965121499
@@ -1977,6 +2038,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bcbef3c13a5b5347bef91496331dad0, type: 3}
+--- !u!114 &1552904221233401827 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3414655019479515355, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+  m_PrefabInstance: {fileID: 2164704033707453365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1785807129577508607 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1785807129030517438, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
@@ -1996,9 +2068,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4198731528848026972, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4654796621952506289, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
       propertyPath: m_Name
       value: Mole
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654796621952506289, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6762710230592769509, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2040,6 +2120,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7221087180848524453, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+      propertyPath: molePowerUpManager
+      value: 
+      objectReference: {fileID: 1705534354}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2061,6 +2145,14 @@ PrefabInstance:
       propertyPath: moleCamera
       value: 
       objectReference: {fileID: 588765003}
+    - target: {fileID: 5342169709987538546, guid: 553d29145ea6e4947bb2ed41ed9879f1, type: 3}
+      propertyPath: holeNavigation
+      value: 
+      objectReference: {fileID: 1552904221233401827}
+    - target: {fileID: 5342169709987538546, guid: 553d29145ea6e4947bb2ed41ed9879f1, type: 3}
+      propertyPath: moleClonePrefab
+      value: 
+      objectReference: {fileID: 6529182351960303318, guid: 3330ae78dfdf0fe4a8883a7cb581a16d, type: 3}
     - target: {fileID: 6886876469791356765, guid: 553d29145ea6e4947bb2ed41ed9879f1, type: 3}
       propertyPath: m_Name
       value: PowerUpManager
@@ -2139,7 +2231,7 @@ PrefabInstance:
       objectReference: {fileID: 1705534352}
     - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: powerUpPrefabs.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: 'powerUpPrefabs.Array.data[1]'
@@ -2232,9 +2324,21 @@ PrefabInstance:
       propertyPath: powerUpManager
       value: 
       objectReference: {fileID: 1705534352}
+    - target: {fileID: 2985335000657358558, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_Name
       value: Hammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3633769059094823161, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4280050123649858947, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5459700220173648250, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2276,6 +2380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7064202947558811362, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2301,4 +2409,5 @@ SceneRoots:
   - {fileID: 2164704033707453365}
   - {fileID: 1076062662271633289}
   - {fileID: 4725713451403883436}
+  - {fileID: 1165430771}
   - {fileID: 3314093231200821638}
