@@ -21,19 +21,25 @@ public class HammerController : MonoBehaviour
     public Action OnHammerHitAttempt;
     public HammerPowerUpManager PowerUpManager => powerUpManager;
 
-    private HoleNavigation holeNavigation;
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction hitAction;
     private float moveTimer;
     private bool isHitting = false;
+    public HoleNavigation holeNavigationScript;
+
+    private Coroutine moleVisionRoutine;
+    private int originalCullingMask;
+
+    // === Events ===
+    public Action OnHammerHitAttempt;
 
     private void Awake ()
     {
-        holeNavigation = GetComponent<HoleNavigation>();
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["MoveHammer"];
         hitAction = playerInput.actions["Hit"];
+        holeNavigationScript = GetComponent<HoleNavigation>();
         hitAction.performed += ctx => OnHit();
 
         hammerBase.position = hammerRestPosition;
@@ -46,7 +52,7 @@ public class HammerController : MonoBehaviour
         Vector2 movement = moveAction.ReadValue<Vector2>();
         if (movement != Vector2.zero && moveTimer >= moveCooldown)
         {
-            holeNavigation.SelectHole(movement, Vector3.right, Vector3.forward);
+            holeNavigationScript.SelectHole(movementHammer, Vector3.right, Vector3.forward);
             moveTimer = 0f;
         }
     }
@@ -67,15 +73,22 @@ public class HammerController : MonoBehaviour
     {
         isHitting = true;
 
-        Coroutine hammerRoutine = StartCoroutine(HitAnimation(holeNavigation.CurrentHole));
+        // Preparación de la instancia del clon si aplica
+        if (hammerPowerUps != null && hammerPowerUps.IsDoubleHitActive())
+        {
+            SpawnHammerClone();
+        }
+
+        // Preparar corrutinas
+        Coroutine hammerRoutine = StartCoroutine(HitAnimation(holeNavigationScript.CurrentHole));
+        
         Coroutine cloneRoutine = null;
 
         if (powerUpManager.IsDoubleHitActive && powerUpManager.HasValidHammerClone())
         {
             powerUpManager.ActivateCloneForHit();
-
-            GameObject randomHole = powerUpManager.GetSecondHole(holeNavigation, holeNavigation.CurrentHole);
-
+            GameObject randomHole = hammerPowerUps.GetSecondHole(holeNavigationScript);
+            
             if (randomHole != null)
             {
                 cloneRoutine = StartCoroutine(

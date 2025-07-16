@@ -7,8 +7,9 @@ public class MoleController : MonoBehaviour
 {
     [Header("Power Up Manager")]
     [SerializeField] private MolePowerUpManager molePowerUpManager;
-
-    private HoleNavigation holeNavigationScript;
+    
+    // === Scripts ===
+    public HoleNavigation holeNavigationScript;
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction popOutAction;

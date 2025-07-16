@@ -6,6 +6,10 @@ public class SplitScreenManager : MonoBehaviour
     [SerializeField] private Camera moleCamera;
     [SerializeField] private Camera hammerCamera;
 
+    // === Properties ===
+    public Camera MoleCamera => moleCamera;
+    public Camera HammerCamera => hammerCamera;
+
     public void SetupSplitScreen()
     {
         if (moleCamera != null)
