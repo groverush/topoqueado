@@ -29,7 +29,7 @@ public class HammerController : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction hitAction;
-    private HoleNavigation holeNavigation;
+    public HoleNavigation holeNavigationScript;
 
     private Coroutine moleVisionRoutine;
     private int originalCullingMask;
@@ -45,7 +45,7 @@ public class HammerController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["MoveHammer"];
         hitAction = playerInput.actions["Hit"];
-        holeNavigation = GetComponent<HoleNavigation>();
+        holeNavigationScript = GetComponent<HoleNavigation>();
 
         hitAction.performed += ctx => OnHit();
 
@@ -62,7 +62,7 @@ public class HammerController : MonoBehaviour
 
         if (movementHammer != Vector2.zero && moveTimer >= moveCooldown)
         {
-            holeNavigation.SelectHole(movementHammer, Vector3.right, Vector3.forward);
+            holeNavigationScript.SelectHole(movementHammer, Vector3.right, Vector3.forward);
             moveTimer = 0f;
         }
     }
@@ -98,12 +98,12 @@ public class HammerController : MonoBehaviour
         }
 
         // Preparar corrutinas
-        Coroutine hammerRoutine = StartCoroutine(HitAnimation(holeNavigation.CurrentHole));
+        Coroutine hammerRoutine = StartCoroutine(HitAnimation(holeNavigationScript.CurrentHole));
         Coroutine cloneRoutine = null;
 
         if (hammerPowerUps != null && hammerPowerUps.IsDoubleHitActive() && hammerCloneInstance != null)
         {
-            GameObject randomHole = hammerPowerUps.GetSecondHole(holeNavigation);
+            GameObject randomHole = hammerPowerUps.GetSecondHole(holeNavigationScript);
             if (randomHole != null)
             {
                 hammerCloneInstance.ActivateClone(hammerRestPosition, initialHammerAngle);
