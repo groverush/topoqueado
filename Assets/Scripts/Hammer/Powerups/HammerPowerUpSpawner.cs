@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class PowerUpSpawner : MonoBehaviour
+public class HammerPowerUpSpawner : MonoBehaviour
 {
     [SerializeField] private BasePowerUp[] powerUpPrefabs;
     [SerializeField] private float spawnInterval = 10f;

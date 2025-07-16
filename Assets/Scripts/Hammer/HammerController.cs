@@ -14,12 +14,10 @@ public class HammerController : MonoBehaviour
     [SerializeField] private float hitDownDuration = 0.08f;
     [SerializeField] private float hitPause = 0.05f;
     [SerializeField] private Vector3 hitOffset = Vector3.zero;
-    [SerializeField] private Vector3 clonePositionOffset = new Vector3(0f, 0f, 0f);
-    public Transform HammerBase => hammerBase;
 
+    public Transform HammerBase => hammerBase;
     public Vector3 HammerRestPosition => hammerRestPosition;
     public float InitialHammerAngle => initialHammerAngle;
-
     public Action OnHammerHitAttempt;
     public HammerPowerUpManager PowerUpManager => powerUpManager;
 
@@ -72,9 +70,10 @@ public class HammerController : MonoBehaviour
         Coroutine hammerRoutine = StartCoroutine(HitAnimation(holeNavigation.CurrentHole));
         Coroutine cloneRoutine = null;
 
-        if (powerUpManager.IsDoubleHitActive && powerUpManager.HammerCloneInstance != null)
+        if (powerUpManager.IsDoubleHitActive && powerUpManager.HasValidHammerClone())
         {
-            powerUpManager.HammerCloneInstance.gameObject.SetActive(true);
+            powerUpManager.ActivateCloneForHit();
+
             GameObject randomHole = powerUpManager.GetSecondHole(holeNavigation, holeNavigation.CurrentHole);
 
             if (randomHole != null)
@@ -96,7 +95,7 @@ public class HammerController : MonoBehaviour
         if (cloneRoutine != null)
             yield return cloneRoutine;
 
-        if (powerUpManager.IsDoubleHitActive && powerUpManager.HammerCloneInstance != null)
+        if (powerUpManager.IsDoubleHitActive && powerUpManager.HasValidHammerClone())
         {
             powerUpManager.HammerCloneInstance.gameObject.SetActive(false);
         }

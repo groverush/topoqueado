@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VisionPowerUp : BasePowerUp
+public class HammerVisionPowerUp : BasePowerUp
 {
     protected override void ApplyEffect ( HammerController hammer )
     {

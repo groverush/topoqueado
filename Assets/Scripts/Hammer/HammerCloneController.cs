@@ -42,16 +42,25 @@ public class HammerCloneController : MonoBehaviour
 
     private IEnumerator RotateHammer ( float fromAngle, float toAngle, float duration )
     {
+        if (hammerBase == null)
+            yield break;
+
         Quaternion startRot = Quaternion.Euler(fromAngle, 0f, 0f);
         Quaternion endRot = Quaternion.Euler(toAngle, 0f, 0f);
 
         float elapsed = 0f;
         while (elapsed < duration)
         {
+            if (hammerBase == null)
+                yield break;
+
             hammerBase.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        hammerBase.localRotation = endRot;
+
+        if (hammerBase != null)
+            hammerBase.localRotation = endRot;
     }
+
 }

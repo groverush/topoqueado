@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +8,6 @@ public class HammerPowerUpManager : MonoBehaviour
     [SerializeField] private GameObject hammerClonePrefab;
     [SerializeField] private float doubleHitDuration = 5f;
     [SerializeField] private Vector3 clonePositionOffset = Vector3.zero;
-    [SerializeField] private float fixedCloneRotationX = -10f;
 
     [Header("Mole Vision Settings")]
     [SerializeField] private Camera hammerCamera;
@@ -26,6 +25,11 @@ public class HammerPowerUpManager : MonoBehaviour
 
     public event Action OnDoubleHitEnd;
     public event Action OnMoleVisionEnd;
+
+    public bool HasValidHammerClone ()
+    {
+        return HammerCloneInstance != null && HammerCloneInstance.gameObject != null;
+    }
 
     public void ActivateDoubleHit ( Transform hammerBase, Vector3 hammerRestPosition, float initialHammerAngle )
     {
@@ -51,46 +55,42 @@ public class HammerPowerUpManager : MonoBehaviour
             remainingTime -= 1f;
         }
 
-        DestroyHammerClone();
+        if (HammerCloneInstance != null)
+        {
+            HammerCloneInstance.DeactivateClone();
+            yield return new WaitForSeconds(0.5f);
+            if (HammerCloneInstance != null)
+                Destroy(HammerCloneInstance.gameObject);
+            HammerCloneInstance = null;
+        }
+
         IsDoubleHitActive = false;
         OnDoubleHitEnd?.Invoke();
     }
-
 
     private void CreateHammerClone ()
     {
         GameObject cloneObj = Instantiate(hammerClonePrefab);
         HammerCloneInstance = cloneObj.GetComponent<HammerCloneController>();
-        HammerCloneInstance.gameObject.SetActive(false); // No se activa aún
+        HammerCloneInstance.gameObject.SetActive(false);
     }
 
     public void SyncHammerClone ( Vector3 hammerRestPosition, float initialHammerAngle )
     {
-        if (HammerCloneInstance != null)
+        if (HasValidHammerClone())
         {
             HammerCloneInstance.transform.position = hammerRestPosition + clonePositionOffset;
             HammerCloneInstance.transform.rotation = Quaternion.identity;
             HammerCloneInstance.hammerBase.localPosition = Vector3.zero;
             HammerCloneInstance.hammerBase.localRotation = Quaternion.Euler(initialHammerAngle, 0f, 0f);
-
-            // Ya no activamos aquí: HammerCloneInstance.gameObject.SetActive(true);
         }
     }
 
-
     public void ActivateCloneForHit ()
     {
-        if (HammerCloneInstance != null && IsDoubleHitActive)
-            HammerCloneInstance.gameObject.SetActive(true);
-    }
-
-    private void DestroyHammerClone ()
-    {
-        if (HammerCloneInstance != null)
+        if (HasValidHammerClone() && IsDoubleHitActive)
         {
-            HammerCloneInstance.DeactivateClone();
-            Destroy(HammerCloneInstance.gameObject);
-            HammerCloneInstance = null;
+            HammerCloneInstance.gameObject.SetActive(true);
         }
     }
 

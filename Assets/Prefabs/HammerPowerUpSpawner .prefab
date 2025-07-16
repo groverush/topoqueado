@@ -46,15 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpPrefabs:
   - {fileID: 4071614541180690574, guid: 81c91dace20c1c84f8da7098d29a984c, type: 3}
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7323623292540987315, guid: 24e87339b58a96f45b337c7292d1d180, type: 3}
+  - {fileID: 674499656171042939, guid: dbe743c2752e9604ba5b8c77ccd6b672, type: 3}
   spawnInterval: 3
-  hammerPowerUps: {fileID: 0}
+  hammerPowerUpsManager: {fileID: 0}
+  holeNavigationScript: {fileID: 0}
