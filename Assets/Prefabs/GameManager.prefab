@@ -55,6 +55,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 377692950908290190}
+  - component: {fileID: 4464128569288445159}
   m_Layer: 0
   m_Name: ScoreManager
   m_TagString: Untagged
@@ -77,6 +78,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3187322010918114759}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4464128569288445159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2934625108611172696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09226ba15b1be784291281cbaecf79ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionManager: {fileID: 7656282879105471231}
 --- !u!1 &4628435518698958928
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,8 +180,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76062e3edcefe0640a41e21c3f97c9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splitScreenManager: {fileID: 901557081851258664}
+  scoreManager: {fileID: 4464128569288445159}
   timeoutPanel: {fileID: 0}
   timeLeftText: {fileID: 0}
+  hammerScoreText: {fileID: 0}
+  moleScoreText: {fileID: 0}
+  floatingHammerScoreText: {fileID: 0}
+  floatingMoleScoreText: {fileID: 0}
+  floatingTextDelay: 1
 --- !u!1 &7074790612611783697
 GameObject:
   m_ObjectHideFlags: 0
