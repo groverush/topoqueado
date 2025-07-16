@@ -6,9 +6,9 @@ public abstract class BasePowerUp : MonoBehaviour
     [SerializeField] private Vector3 offsetPosition = Vector3.up;
     [SerializeField] private float lifeDuration = 10f;
 
-    private bool collected = false;
+    public event Action OnCollected;
 
-    public event Action OnCollected; // Evento público para que otros scripts se suscriban
+    private bool collected = false;
 
     private void Start ()
     {
@@ -18,20 +18,14 @@ public abstract class BasePowerUp : MonoBehaviour
 
     private void OnTriggerEnter ( Collider other )
     {
-        if (other.CompareTag("Hammer"))
+        if (other.CompareTag("Hammer") && !collected)
         {
-            HammerController hammerController = other.GetComponent<HammerController>();
-            if (hammerController == null)
-                hammerController = other.GetComponentInParent<HammerController>();
+            HammerController hammer = other.GetComponent<HammerController>() ?? other.GetComponentInParent<HammerController>();
 
-            if (hammerController != null)
+            if (hammer != null)
             {
-                ApplyEffect(hammerController);
-                OnCollectedLogic();
-            }
-            else
-            {
-                Debug.LogWarning($"El objeto {other.name} tiene el tag Hammer pero no se encontró HammerController ni en el objeto ni en sus padres.");
+                ApplyEffect(hammer);
+                HandleCollected();
             }
         }
     }
@@ -41,15 +35,11 @@ public abstract class BasePowerUp : MonoBehaviour
     private void DestroyIfNotCollected ()
     {
         if (!collected)
-        {
-            OnCollectedLogic();
-        }
+            HandleCollected();
     }
 
-    private void OnCollectedLogic ()
+    private void HandleCollected ()
     {
-        if (collected) return;
-
         collected = true;
         OnCollected?.Invoke();
         Destroy(gameObject);

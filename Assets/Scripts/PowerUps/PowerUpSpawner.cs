@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerUpSpawner : MonoBehaviour
 {
     [SerializeField] private BasePowerUp[] powerUpPrefabs;
     [SerializeField] private float spawnInterval = 10f;
-    [SerializeField] private HammerPowerUps hammerPowerUps; // Asignar desde inspector
+    [SerializeField] private HammerPowerUpManager hammerPowerUpsManager;
     [SerializeField] private HoleNavigation holeNavigationScript;
 
     private Coroutine spawnRoutine;
@@ -14,20 +13,15 @@ public class PowerUpSpawner : MonoBehaviour
 
     private void Start ()
     {
-        if (hammerPowerUps != null)
-        {
-            hammerPowerUps.OnDoubleHitEnd += ResumeSpawning;
-        }
-
+        hammerPowerUpsManager.OnDoubleHitEnd += ResumeSpawning;
+        hammerPowerUpsManager.OnMoleVisionEnd += ResumeSpawning;
         StartSpawning();
     }
 
     private void StartSpawning ()
     {
         if (spawnRoutine == null)
-        {
             spawnRoutine = StartCoroutine(SpawnLoop());
-        }
     }
 
     private void StopSpawning ()
@@ -36,7 +30,6 @@ public class PowerUpSpawner : MonoBehaviour
         {
             StopCoroutine(spawnRoutine);
             spawnRoutine = null;
-            Debug.Log("Spawner detenido mientras DoubleHit está activo.");
         }
     }
 
@@ -46,56 +39,50 @@ public class PowerUpSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnInterval);
 
-            if (hammerPowerUps == null || !hammerPowerUps.IsDoubleHitActive())
-            {
-                if (currentPowerUp == null) // Solo si no hay un power-up activo en el escenario
-                {
-                    SpawnPowerUp();
-                }
-                else
-                {
-                    Debug.Log("Esperando a que se consuma el power-up antes de generar uno nuevo.");
-                }
-            }
-            else
+            if (hammerPowerUpsManager.IsDoubleHitActive || hammerPowerUpsManager.IsMoleVisionActive)
             {
                 StopSpawning();
                 yield break;
+            }
+
+            if (currentPowerUp == null)
+            {
+                SpawnPowerUp();
             }
         }
     }
 
     private void ResumeSpawning ()
     {
-        Debug.Log("DoubleHit finalizado. Reanudando spawner.");
-        StartSpawning();
+        if (!hammerPowerUpsManager.IsDoubleHitActive && !hammerPowerUpsManager.IsMoleVisionActive)
+        {
+            StartSpawning();
+        }
     }
 
     private void SpawnPowerUp ()
     {
         if (powerUpPrefabs.Length == 0 || holeNavigationScript.Holes.Count == 0) return;
 
-        int randomPrefabIndex = Random.Range(0, powerUpPrefabs.Length);
-
-        BasePowerUp newPowerUp = Instantiate(powerUpPrefabs[randomPrefabIndex], holeNavigationScript.GetRandomHole().transform.position, Quaternion.identity);
-        currentPowerUp = newPowerUp;
+        int randomIndex = Random.Range(0, powerUpPrefabs.Length);
+        BasePowerUp newPowerUp = Instantiate(
+            powerUpPrefabs[randomIndex],
+            holeNavigationScript.GetRandomHole().transform.position,
+            Quaternion.identity
+        );
 
         newPowerUp.OnCollected += HandlePowerUpCollected;
-
-        Debug.Log("PowerUp instanciado.");
+        currentPowerUp = newPowerUp;
     }
 
     private void HandlePowerUpCollected ()
     {
-        Debug.Log("PowerUp recogido, se habilita nuevo spawn.");
         currentPowerUp = null;
     }
 
     private void OnDestroy ()
     {
-        if (hammerPowerUps != null)
-        {
-            hammerPowerUps.OnDoubleHitEnd -= ResumeSpawning;
-        }
+        hammerPowerUpsManager.OnDoubleHitEnd -= ResumeSpawning;
+        hammerPowerUpsManager.OnMoleVisionEnd -= ResumeSpawning;
     }
 }

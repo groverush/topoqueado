@@ -4,15 +4,14 @@ public class DoubleHitPowerUp : BasePowerUp
 {
     protected override void ApplyEffect ( HammerController hammer )
     {
-        if (hammer != null)
+        if (hammer != null && hammer.PowerUpManager != null)
         {
-            hammer.HammerPowerUps.ActivateDoubleHit();
-            Debug.Log("DoubleHitPowerUp: ActivateDoubleHit llamado ");
-        }
-        else
-        {
-            Debug.LogWarning("DoubleHitPowerUp: Hammer o HammerPowerUps es null");
+            hammer.PowerUpManager.ActivateDoubleHit(
+                hammer.HammerBase,
+                hammer.HammerRestPosition,
+                hammer.InitialHammerAngle
+            );
+            Debug.Log("DoubleHitPowerUp: Activado desde el power-up.");
         }
     }
-
 }

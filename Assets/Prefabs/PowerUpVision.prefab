@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4720015393194241489}
   - component: {fileID: 7901770555108128023}
   - component: {fileID: 2232718883202501269}
-  - component: {fileID: 343679199552886571}
   - component: {fileID: 4730687063063871314}
+  - component: {fileID: 7323623292540987315}
   m_Layer: 0
-  m_Name: PowerUpHideHole
+  m_Name: PowerUpVision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,20 +112,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &343679199552886571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336430708596517469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48d542dbfce3d7d43ba485f529b60bb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetPosition: {x: 0, y: 0.5, z: 0}
-  lifeDuration: 5
 --- !u!54 &4730687063063871314
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -153,3 +139,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &7323623292540987315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7336430708596517469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af30a677c77a9ba478d027f68f255468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetPosition: {x: 0, y: 0.5, z: 0}
+  lifeDuration: 5

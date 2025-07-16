@@ -1192,6 +1192,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3414655019479515355, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
+      propertyPath: currentHoleType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3414655019479515355, guid: e9ab7f2279f03ec4fb33dd3671b9af7e, type: 3}
       propertyPath: 'holes.Array.data[0]'
       value: 
       objectReference: {fileID: 1892006247}
@@ -1393,7 +1397,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2076158637}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: RestartGame
         m_Mode: 1
@@ -1467,6 +1471,10 @@ PrefabInstance:
       propertyPath: hammerCamera
       value: 
       objectReference: {fileID: 1688662081}
+    - target: {fileID: 1806779857430254455, guid: 53d32d5112d6a8f4ab40ff7429cd27a6, type: 3}
+      propertyPath: timeLimit
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 3187322010918114759, guid: 53d32d5112d6a8f4ab40ff7429cd27a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.297918
@@ -1943,6 +1951,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 728025475}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!1 &1705534351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705534353}
+  - component: {fileID: 1705534352}
+  m_Layer: 0
+  m_Name: PowerUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1705534352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705534351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2640958044b66146bef4aba9f67f9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammerClonePrefab: {fileID: 9062165328349399682, guid: 485ae6ae5e1bf2743bbf0639f6076866, type: 3}
+  doubleHitDuration: 5
+  clonePositionOffset: {x: 0, y: 0, z: 0}
+  fixedCloneRotationX: 0
+  hammerCamera: {fileID: 1688662081}
+  moleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  moleVisionDuration: 5
+--- !u!4 &1705534353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705534351}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17928863, y: 3.5001888, z: -6.001214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1892006247 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4489759452586809394, guid: 1bcbef3c13a5b5347bef91496331dad0, type: 3}
@@ -2067,6 +2128,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1994000236156009816, guid: 1bcbef3c13a5b5347bef91496331dad0, type: 3}
   m_PrefabInstance: {fileID: 1076062662271633289}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2076158637 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4761221759048582001, guid: 53d32d5112d6a8f4ab40ff7429cd27a6, type: 3}
+  m_PrefabInstance: {fileID: 1238379474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87370734e65c8f14da9a4aaab426b1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1076062662271633289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2179,17 +2251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993f299f2b6e7a14ba947f5cfd33ef26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3521782735999626947 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3521782735468675714, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
-  m_PrefabInstance: {fileID: 6612646101492342711}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42474d2840f15db4aac3429ed8e8f53c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3804716644590437192 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3804716645117521673, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
@@ -2212,11 +2273,19 @@ PrefabInstance:
     - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: hammerPowerUps
       value: 
-      objectReference: {fileID: 3521782735999626947}
+      objectReference: {fileID: 0}
     - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: holeNavigationScript
       value: 
       objectReference: {fileID: 1785807129577508607}
+    - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
+      propertyPath: hammerPowerUpsManager
+      value: 
+      objectReference: {fileID: 1705534352}
+    - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
+      propertyPath: powerUpPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: 'spawnPoints.Array.data[0]'
       value: 
@@ -2253,6 +2322,14 @@ PrefabInstance:
       propertyPath: 'spawnPoints.Array.data[8]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
+      propertyPath: 'powerUpPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7323623292540987315, guid: 24e87339b58a96f45b337c7292d1d180, type: 3}
+    - target: {fileID: 4413186036489354296, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
+      propertyPath: 'powerUpPrefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 674499656171042939, guid: dbe743c2752e9604ba5b8c77ccd6b672, type: 3}
     - target: {fileID: 7575135288945231926, guid: 92ab64ef22bf33c4aa1d199b429ac032, type: 3}
       propertyPath: m_Name
       value: 'HammerPowerUpSpawner '
@@ -2310,6 +2387,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1551025636103226626, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
+      propertyPath: powerUpManager
+      value: 
+      objectReference: {fileID: 1705534352}
     - target: {fileID: 1551025636103226626, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
       propertyPath: hammerClonePrefab
       value: 
@@ -2394,7 +2475,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3521782735468675714, guid: e7cbe638597902447b1674b8ba20f416, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2419,3 +2501,4 @@ SceneRoots:
   - {fileID: 1003136113}
   - {fileID: 1076062662271633289}
   - {fileID: 4725713451403883436}
+  - {fileID: 1705534353}
