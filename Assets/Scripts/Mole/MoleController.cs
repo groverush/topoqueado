@@ -5,63 +5,54 @@ using UnityEngine.InputSystem;
 
 public class MoleController : MonoBehaviour
 {
+    [Header("Power Up Manager")]
+    [SerializeField] private MolePowerUpManager molePowerUpManager;
+    
     // === Scripts ===
     public HoleNavigation holeNavigationScript;
-
-    // === Input ===
     private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction popOutAction;
 
-    // === Movement ===
     [SerializeField] private float movementCooldown;
     private float movementTimer = 0f;
     private bool canMove = true;
     private Vector2 movementInput;
 
-    // === Pop out ===
     [SerializeField] private float popOutCooldown;
     private float popOutTimer = 0f;
     private bool canPopOut = true;
     private Vector3 originalPosition;
 
-    // === Pop state ===
-    public enum PopStates { Hidden, Visible};
+    public enum PopStates { Hidden, Visible };
     private PopStates currentPopState = PopStates.Hidden;
 
-    // === Events ===
     public event Action OnMoleHit;
 
-    // === Properties ===
+    [SerializeField] private Transform moleBase;
+    private Coroutine currentAnimationRoutine;
     public PopStates CurrentPopState => currentPopState;
+    public MolePowerUpManager MolePowerUpManager => molePowerUpManager;
+    private bool wasPopOutPressedLastFrame = false;
 
-    // === Pop in / out transition ===
-    // [SerializeField] private float popOutHeight = 0.5f;
-    // [SerializeField] private float transitionDuration = 0.2f;
-    // private Coroutine popRoutine;
-
-    void Awake()
+    private void Awake ()
     {
         holeNavigationScript = GetComponent<HoleNavigation>();
-
         originalPosition = transform.position;
 
         playerInput = GetComponent<PlayerInput>();
-
         moveAction = playerInput.actions["MoveMole"];
         popOutAction = playerInput.actions["PopOut"];
-
         popOutAction.canceled += OnPopOutReleased;
     }
 
-    void OnDestroy()
+    private void OnDestroy ()
     {
         popOutAction.canceled -= OnPopOutReleased;
     }
 
-    void Update()
+    private void Update ()
     {
-        // Movement with cooldown
         movementTimer += Time.deltaTime;
         movementInput = moveAction.ReadValue<Vector2>();
 
@@ -71,89 +62,93 @@ public class MoleController : MonoBehaviour
             movementTimer = 0;
         }
 
-        // Pop in / out management
-        if (canPopOut && popOutAction.ReadValue<float>() > 0)
+        float popOutValue = popOutAction.ReadValue<float>();
+        bool isPopOutPressed = popOutValue > 0;
+
+        if (canPopOut && isPopOutPressed && !wasPopOutPressedLastFrame)
         {
             PopOut();
+            molePowerUpManager.TryShowClone(holeNavigationScript.CurrentHole.transform.position);
         }
-        else
+        else if (!isPopOutPressed && wasPopOutPressedLastFrame)
         {
             PopIn();
+            molePowerUpManager.HideClone();
         }
+
+        wasPopOutPressedLastFrame = isPopOutPressed;
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter ( Collision collision )
     {
         if (collision.gameObject.CompareTag("Hammer"))
         {
-            OnMoleHit?.Invoke(); // Notify CollisionManager
-
+            OnMoleHit?.Invoke();
             PopIn();
-
-            // Código provisional (se debe optimizar)
+            molePowerUpManager.HideClone();
+            CancelPopOutInput();
             canPopOut = false;
             popOutTimer = 0f;
             StartCoroutine(PopOutCooldownRoutine());
         }
     }
 
-    private void PopIn()
+    private void PopOut ()
     {
-        transform.position = originalPosition;
-        currentPopState = PopStates.Hidden;
-        canMove = true;
+        if (currentAnimationRoutine != null) StopCoroutine(currentAnimationRoutine);
+        currentAnimationRoutine = StartCoroutine(RotateMole(-20f, 20f, 0.2f));
 
-        // if (popRoutine != null) StopCoroutine(popRoutine);
-
-        // popRoutine = StartCoroutine(MoveToPosition(originalPosition));
-        // canMove = true;
-    }
-
-    private void PopOut()
-    {
         transform.position = holeNavigationScript.CurrentHole.transform.position;
         currentPopState = PopStates.Visible;
         canMove = false;
-
-        // if (popRoutine != null) StopCoroutine(popRoutine);
-
-        // Vector3 targetPosition = holeNavigationScript.CurrentHole.transform.position + Vector3.up * popOutHeight;
-        // popRoutine = StartCoroutine(MoveToPosition(targetPosition));
-
-        // canMove = false;
     }
 
-    private void OnPopOutReleased(InputAction.CallbackContext context)
+    private void PopIn ()
     {
-        // When the player hides, the cooldown begins
+        if (currentAnimationRoutine != null) StopCoroutine(currentAnimationRoutine);
+        currentAnimationRoutine = StartCoroutine(RotateMole(20f, -20f, 0.2f));
+
+        transform.position = originalPosition;
+        currentPopState = PopStates.Hidden;
+        canMove = true;
+    }
+
+    private IEnumerator RotateMole ( float fromAngle, float toAngle, float duration )
+    {
+        Quaternion startRot = Quaternion.Euler(fromAngle, 0f, 0f);
+        Quaternion endRot = Quaternion.Euler(toAngle, 0f, 0f);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            moleBase.localRotation = Quaternion.Slerp(startRot, endRot, elapsed / duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        moleBase.localRotation = endRot;
+    }
+
+    private void OnPopOutReleased ( InputAction.CallbackContext context )
+    {
         canPopOut = false;
         popOutTimer = 0f;
         StartCoroutine(PopOutCooldownRoutine());
     }
 
-    private IEnumerator PopOutCooldownRoutine()
+    private IEnumerator PopOutCooldownRoutine ()
     {
         while (popOutTimer < popOutCooldown)
         {
             popOutTimer += Time.deltaTime;
             yield return null;
         }
-
         canPopOut = true;
     }
 
-    // private IEnumerator MoveToPosition(Vector3 targetPosition)
-    // {
-    //     Vector3 start = transform.position;
-    //     float elapsed = 0f;
-        
-    //     while (elapsed < transitionDuration)
-    //     {
-    //         transform.position = Vector3.Lerp(start, targetPosition, elapsed / transitionDuration);
-    //         elapsed += Time.deltaTime;
-    //         yield return null;
-    //     }
-
-    //     transform.position = targetPosition;
-    // }
+    private void CancelPopOutInput ()
+    {
+        popOutAction.Disable();
+        popOutAction.Enable();
+    }
 }
