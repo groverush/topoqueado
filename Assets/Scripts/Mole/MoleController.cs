@@ -24,16 +24,15 @@ public class MoleController : MonoBehaviour
     private bool canPopOut = true;
     private Vector3 originalPosition;
 
-    [SerializeField] private Transform moleBase;
-    private Coroutine currentAnimationRoutine;
-
     public enum PopStates { Hidden, Visible };
     private PopStates currentPopState = PopStates.Hidden;
 
     public event Action OnMoleHit;
+
+    [SerializeField] private Transform moleBase;
+    private Coroutine currentAnimationRoutine;
     public PopStates CurrentPopState => currentPopState;
     public MolePowerUpManager MolePowerUpManager => molePowerUpManager;
-
     private bool wasPopOutPressedLastFrame = false;
 
     private void Awake ()

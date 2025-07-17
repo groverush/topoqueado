@@ -7,10 +7,10 @@ public class SceneSwitchingManager : MonoBehaviour
 {
     // Constants for scene names
     private const string mainMenuScene = "MainMenu";
-    private const string mainScene = "TestMainScene";
+    private const string mainScene = "MainScene";
     private const string tutorialScene = "TutorialScene";
     private const string creditsScene = "CreditsScene";
-    [SerializeField] private Sprite[] slides; //
+    [SerializeField] private Sprite[] slides; 
     [Header("Tutorial Presentation")]
     [SerializeField] private Image displayImage; // UI Image to show slides
     private int currentSlide = 0;

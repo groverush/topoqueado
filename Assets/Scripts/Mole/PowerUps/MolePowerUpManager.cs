@@ -8,6 +8,7 @@ public class MolePowerUpManager : MonoBehaviour
     [SerializeField] private GameObject moleClonePrefab;
     [SerializeField] private Vector3 cloneOffset = Vector3.zero;
     [SerializeField] private HoleNavigation holeNavigation;
+    [SerializeField] private float moleCloneDuration = 5f;
     private MoleCloneController moleCloneInstance;
     private Vector3 lastClonePosition;
     private Coroutine cloneTimerRoutine;
@@ -37,7 +38,7 @@ public class MolePowerUpManager : MonoBehaviour
         IsCloneAbilityUnlocked = true;
 
         if (cloneTimerRoutine != null) StopCoroutine(cloneTimerRoutine);
-        cloneTimerRoutine = StartCoroutine(AbilityTimer(10f, // Ajusta el tiempo del clone aquí
+        cloneTimerRoutine = StartCoroutine(AbilityTimer(moleCloneDuration, 
             time => CloneAbilityTimeRemaining = time,
             () =>
             {
@@ -78,7 +79,7 @@ public class MolePowerUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No hay agujeros válidos para el clon.");
+            Debug.LogWarning("No hay agujeros validos para el clon.");
         }
     }
 
