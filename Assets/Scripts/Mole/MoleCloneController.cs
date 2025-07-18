@@ -4,6 +4,8 @@ using UnityEngine;
 public class MoleCloneController : MonoBehaviour
 {
     [SerializeField] private Transform moleBase;
+    [SerializeField] private float posY;
+    [SerializeField] private Vector3 offset;
 
     private Coroutine currentAnimationRoutine;
     private bool isAbilityUnlocked = false;
@@ -19,8 +21,10 @@ public class MoleCloneController : MonoBehaviour
     public void ShowAtPosition ( Vector3 targetPosition )
     {
         if (!isAbilityUnlocked || isVisible) return;
+        offset = new Vector3(0f, posY, 0f);
+        transform.position = targetPosition + offset;
 
-        transform.position = targetPosition;
+        Debug.Log("Clone in position" + transform.position);
         gameObject.SetActive(true);
 
         if (currentAnimationRoutine != null)
@@ -40,9 +44,21 @@ public class MoleCloneController : MonoBehaviour
         currentAnimationRoutine = StartCoroutine(HideRoutine());
     }
 
+    public void ForceHideCloneImmediately ()
+    {
+        if (!isAbilityUnlocked) return;
+
+        if (currentAnimationRoutine != null)
+            StopCoroutine(currentAnimationRoutine);
+
+        moleBase.localRotation = Quaternion.Euler(-20f, 0f, 0f);
+        gameObject.SetActive(false);
+        isVisible = false;
+    }
+
     private IEnumerator HideRoutine ()
     {
-        yield return RotateMole(20f, -20f, 0.2f);
+        yield return RotateMole(20f, -20f, 0f);
         gameObject.SetActive(false);
         isVisible = false;
     }

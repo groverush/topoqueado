@@ -38,13 +38,16 @@ public class MolePowerUpManager : MonoBehaviour
         IsCloneAbilityUnlocked = true;
 
         if (cloneTimerRoutine != null) StopCoroutine(cloneTimerRoutine);
-        cloneTimerRoutine = StartCoroutine(AbilityTimer(moleCloneDuration, 
+        cloneTimerRoutine = StartCoroutine(AbilityTimer(moleCloneDuration,
             time => CloneAbilityTimeRemaining = time,
             () =>
             {
                 IsCloneAbilityUnlocked = false;
                 CloneAbilityTimeRemaining = 0f;
-                HideClone();
+                if (moleCloneInstance != null)
+                {
+                    moleCloneInstance.ForceHideCloneImmediately();
+                }
                 OnCloneEnd?.Invoke();
             }));
     }
@@ -74,14 +77,17 @@ public class MolePowerUpManager : MonoBehaviour
 
         if (randomHole != null)
         {
-            lastClonePosition = randomHole.transform.position + cloneOffset;
+            Vector3 targetPosition = new Vector3(randomHole.transform.position.x, moleCurrentPosition.y, randomHole.transform.position.z);
+            lastClonePosition = targetPosition;
             moleCloneInstance.ShowAtPosition(lastClonePosition);
         }
         else
         {
-            Debug.LogWarning("No hay agujeros validos para el clon.");
+            Debug.LogWarning("No hay agujeros válidos para el clon.");
         }
     }
+
+
 
     public void HideClone ()
     {

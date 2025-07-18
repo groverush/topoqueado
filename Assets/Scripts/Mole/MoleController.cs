@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class MoleController : MonoBehaviour
 {
     // === Scripts ===
-    public HoleNavigation holeNavigationScript;
+    [HideInInspector] public HoleNavigation holeNavigationScript;
 
     // === Input ===
     private PlayerInput playerInput;
@@ -100,6 +100,8 @@ public class MoleController : MonoBehaviour
         transform.position = originalPosition;
         currentPopState = PopStates.Hidden;
         canMove = true;
+
+        Debug.Log("Mole in position" + transform.position);
     }
 
     private void PopOut()

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4720015393194241489}
   - component: {fileID: 7901770555108128023}
   - component: {fileID: 2232718883202501269}
-  - component: {fileID: 4730687063063871314}
   - component: {fileID: 7323623292540987315}
   m_Layer: 11
   m_Name: HammerPowerUpVision
@@ -112,33 +111,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4730687063063871314
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7336430708596517469}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!114 &7323623292540987315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,5 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30a677c77a9ba478d027f68f255468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetPosition: {x: 0, y: 0.5, z: 0}
+  offsetPosition: {x: 0, y: 0.2, z: 0}
   lifeDuration: 5
+  rotationSpeed: 100
+  bounceAmplitude: 0.1
+  bounceFrequency: 3
