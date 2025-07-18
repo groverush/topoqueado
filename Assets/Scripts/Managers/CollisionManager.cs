@@ -50,8 +50,6 @@ public class CollisionManager : MonoBehaviour
     {
         if (!isHitValidate)
         {
-            Debug.Log("✅ ¡Golpe acertado!");
-
             OnHitSuccess?.Invoke(hammerController);
             isHitValidate = true;
         }
@@ -62,8 +60,6 @@ public class CollisionManager : MonoBehaviour
     {
         if (!isHitValidate)
         {
-            Debug.Log("❌ Golpe fallido");
-            
             OnHitMiss?.Invoke(moleController);
             isHitValidate = true;
         }
