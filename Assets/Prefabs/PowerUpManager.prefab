@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6886876469791356765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7240338744930453730}
+  - component: {fileID: 435388155435582139}
+  - component: {fileID: 5342169709987538546}
+  m_Layer: 0
+  m_Name: PowerUpManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7240338744930453730
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886876469791356765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.17928863, y: 3.5001888, z: -6.001214}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &435388155435582139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886876469791356765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2640958044b66146bef4aba9f67f9f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hammerClonePrefab: {fileID: 2240469670480844494, guid: 8c0a7b6759548974f9ddf09a301aff9a, type: 3}
+  doubleHitDuration: 5
+  clonePositionOffset: {x: 0, y: 0, z: 0}
+  hammerCamera: {fileID: 0}
+  moleLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  hammerVisionDuration: 5
+--- !u!114 &5342169709987538546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6886876469791356765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125541d6a5432ff40b95b73718ae7a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moleClonePrefab: {fileID: 2989980659999583884, guid: 8a5e4af27e5288f4b9a17ddf35184270, type: 3}
+  cloneOffset: {x: 0, y: 0, z: 0}
+  holeNavigation: {fileID: 0}
+  moleCloneDuration: 5
+  moleCamera: {fileID: 0}
+  moleLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  moleVisionDuration: 5
