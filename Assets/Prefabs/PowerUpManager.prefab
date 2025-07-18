@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2640958044b66146bef4aba9f67f9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hammerClonePrefab: {fileID: 9062165328349399682, guid: 485ae6ae5e1bf2743bbf0639f6076866, type: 3}
+  hammerClonePrefab: {fileID: 2240469670480844494, guid: 8c0a7b6759548974f9ddf09a301aff9a, type: 3}
   doubleHitDuration: 5
   clonePositionOffset: {x: 0, y: 0, z: 0}
   hammerCamera: {fileID: 0}
   moleLayer:
     serializedVersion: 2
     m_Bits: 256
-  moleVisionDuration: 5
+  hammerVisionDuration: 5
 --- !u!114 &5342169709987538546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,10 +65,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 125541d6a5432ff40b95b73718ae7a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moleClonePrefab: {fileID: 0}
-  cloneDuration: 5
+  moleClonePrefab: {fileID: 2989980659999583884, guid: 8a5e4af27e5288f4b9a17ddf35184270, type: 3}
+  cloneOffset: {x: 0, y: 0, z: 0}
+  holeNavigation: {fileID: 0}
+  moleCloneDuration: 5
   moleCamera: {fileID: 0}
-  hammerLayer:
+  moleLayer:
     serializedVersion: 2
     m_Bits: 512
-  visionDuration: 5
+  moleVisionDuration: 5

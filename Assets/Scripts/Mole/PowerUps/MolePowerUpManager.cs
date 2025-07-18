@@ -15,7 +15,7 @@ public class MolePowerUpManager : MonoBehaviour
 
     [Header("Mole Vision Settings")]
     [SerializeField] private Camera moleCamera;
-    [SerializeField] private LayerMask moleLayer;
+    [SerializeField] private LayerMask hammerLayer;
     [SerializeField] private float moleVisionDuration = 5f;
     private Coroutine moleVisionRoutine;
     private int originalCullingMask;
@@ -102,7 +102,7 @@ public class MolePowerUpManager : MonoBehaviour
         IsMoleVisionActive = true;
         MoleVisionTimeRemaining = moleVisionDuration;
         originalCullingMask = moleCamera.cullingMask;
-        moleCamera.cullingMask |= moleLayer.value;
+        moleCamera.cullingMask |= hammerLayer.value;
 
         yield return AbilityTimer(moleVisionDuration,
             time => MoleVisionTimeRemaining = time,
