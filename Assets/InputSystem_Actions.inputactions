@@ -1053,6 +1053,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
+                    "groups": ";Keyboard",
                     "action": "MoveMole",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1086,6 +1087,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
+                    "groups": ";Keyboard",
                     "action": "MoveMole",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1093,6 +1095,7 @@
                 {
                     "name": "",
                     "id": "c1f237cc-0f6f-4b43-a30c-a731fcc52eb1",
+                    "path": "<Keyboard>/space",
                     "path": "<Keyboard>/space",
                     "interactions": "Hold",
                     "processors": "",
@@ -1155,12 +1158,13 @@
                     "path": "<Keyboard>/numpad0",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard",
                     "action": "Hit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "Arrows",
                     "name": "Arrows",
                     "id": "2d251444-0bcd-446b-8d49-65d86e2c4cef",
                     "path": "2DVector",
@@ -1175,8 +1179,10 @@
                     "name": "up",
                     "id": "4bccc669-3278-4e71-8617-b56308d0c2c3",
                     "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
+                    "groups": ";Keyboard",
                     "groups": ";Keyboard",
                     "action": "MoveHammer",
                     "isComposite": false,
@@ -1186,8 +1192,10 @@
                     "name": "down",
                     "id": "d0fdf59d-dce4-4f50-96bc-962151241209",
                     "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
+                    "groups": ";Keyboard",
                     "groups": ";Keyboard",
                     "action": "MoveHammer",
                     "isComposite": false,
@@ -1196,6 +1204,7 @@
                 {
                     "name": "left",
                     "id": "47801aa1-b776-44d9-be35-e4b8ac68224c",
+                    "path": "<Keyboard>/leftArrow",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
@@ -1208,8 +1217,10 @@
                     "name": "right",
                     "id": "9440e54c-c951-442d-b578-b625ff1d9422",
                     "path": "<Keyboard>/rightArrow",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
+                    "groups": ";Keyboard",
                     "groups": ";Keyboard",
                     "action": "MoveHammer",
                     "isComposite": false,
@@ -1274,6 +1285,17 @@
             "devices": [
                 {
                     "devicePath": "<XRController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }
