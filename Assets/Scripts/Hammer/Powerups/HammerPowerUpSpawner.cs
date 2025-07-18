@@ -68,7 +68,7 @@ public class HammerPowerUpSpawner : MonoBehaviour
         BasePowerUp newPowerUp = Instantiate(
             powerUpPrefabs[randomIndex],
             holeNavigationScript.GetRandomHole().transform.position,
-            Quaternion.identity
+            powerUpPrefabs[randomIndex].transform.rotation
         );
 
         newPowerUp.OnCollected += HandlePowerUpCollected;

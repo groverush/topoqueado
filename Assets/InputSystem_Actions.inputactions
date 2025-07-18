@@ -1129,11 +1129,33 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "95659dfd-a1cf-445e-b2ed-5902347fa5ed",
+                    "id": "7bc08009-71cc-4aff-aa58-21b0bdd21321",
                     "path": "<Keyboard>/rightCtrl",
                     "interactions": "",
                     "processors": "",
+                    "groups": "",
+                    "action": "Hit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95659dfd-a1cf-445e-b2ed-5902347fa5ed",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
                     "groups": ";Keyboard",
+                    "action": "Hit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00c28f60-7d7d-4f72-9875-431493acd5d2",
+                    "path": "<Keyboard>/numpad0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Hit",
                     "isComposite": false,
                     "isPartOfComposite": false

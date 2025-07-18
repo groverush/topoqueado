@@ -64,7 +64,7 @@ public class MolePowerUpSpawner : MonoBehaviour
         BasePowerUp newPowerUp = Instantiate(
             molePowerUpPrefabs[randomIndex],
             holeNavigationScript.GetRandomHole().transform.position,
-            Quaternion.identity
+            molePowerUpPrefabs[randomIndex].transform.rotation
         );
 
         newPowerUp.OnCollected += HandlePowerUpCollected;

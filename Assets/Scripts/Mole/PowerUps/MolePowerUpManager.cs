@@ -8,13 +8,14 @@ public class MolePowerUpManager : MonoBehaviour
     [SerializeField] private GameObject moleClonePrefab;
     [SerializeField] private Vector3 cloneOffset = Vector3.zero;
     [SerializeField] private HoleNavigation holeNavigation;
+    [SerializeField] private float moleCloneDuration = 5f;
     private MoleCloneController moleCloneInstance;
     private Vector3 lastClonePosition;
     private Coroutine cloneTimerRoutine;
 
     [Header("Mole Vision Settings")]
     [SerializeField] private Camera moleCamera;
-    [SerializeField] private LayerMask moleLayer;
+    [SerializeField] private LayerMask hammerLayer;
     [SerializeField] private float moleVisionDuration = 5f;
     private Coroutine moleVisionRoutine;
     private int originalCullingMask;
@@ -37,7 +38,7 @@ public class MolePowerUpManager : MonoBehaviour
         IsCloneAbilityUnlocked = true;
 
         if (cloneTimerRoutine != null) StopCoroutine(cloneTimerRoutine);
-        cloneTimerRoutine = StartCoroutine(AbilityTimer(10f, // Ajusta el tiempo del clone aquí
+        cloneTimerRoutine = StartCoroutine(AbilityTimer(moleCloneDuration, 
             time => CloneAbilityTimeRemaining = time,
             () =>
             {
@@ -78,7 +79,7 @@ public class MolePowerUpManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No hay agujeros válidos para el clon.");
+            Debug.LogWarning("No hay agujeros validos para el clon.");
         }
     }
 
@@ -101,7 +102,7 @@ public class MolePowerUpManager : MonoBehaviour
         IsMoleVisionActive = true;
         MoleVisionTimeRemaining = moleVisionDuration;
         originalCullingMask = moleCamera.cullingMask;
-        moleCamera.cullingMask |= moleLayer.value;
+        moleCamera.cullingMask |= hammerLayer.value;
 
         yield return AbilityTimer(moleVisionDuration,
             time => MoleVisionTimeRemaining = time,
