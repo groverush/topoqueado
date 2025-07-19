@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class MoleController : MonoBehaviour
 {
     // === Scripts ===
-    public HoleNavigation holeNavigationScript;
+    [HideInInspector] public HoleNavigation holeNavigationScript;
 
     // === Input ===
     private PlayerInput playerInput;
