@@ -1129,8 +1129,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "7bc08009-71cc-4aff-aa58-21b0bdd21321",
-                    "path": "<Keyboard>/rightCtrl",
+                    "id": "00c28f60-7d7d-4f72-9875-431493acd5d2",
+                    "path": "<Keyboard>/numpad0",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1140,19 +1140,8 @@
                 },
                 {
                     "name": "",
-                    "id": "95659dfd-a1cf-445e-b2ed-5902347fa5ed",
-                    "path": "<Keyboard>/rightShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Hit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "00c28f60-7d7d-4f72-9875-431493acd5d2",
-                    "path": "<Keyboard>/numpad0",
+                    "id": "a515aab2-c5c3-4328-adb1-26bd82afc189",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
