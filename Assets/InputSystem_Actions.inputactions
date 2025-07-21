@@ -1094,7 +1094,7 @@
                     "name": "",
                     "id": "c1f237cc-0f6f-4b43-a30c-a731fcc52eb1",
                     "path": "<Keyboard>/space",
-                    "interactions": "Hold",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "PopOut",
@@ -1129,19 +1129,8 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "7bc08009-71cc-4aff-aa58-21b0bdd21321",
-                    "path": "<Keyboard>/rightCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Hit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "95659dfd-a1cf-445e-b2ed-5902347fa5ed",
-                    "path": "<Keyboard>/rightShift",
+                    "id": "71e56714-221c-4333-90d8-67964d9bb43d",
+                    "path": "<Keyboard>/numpad0",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
@@ -1151,8 +1140,8 @@
                 },
                 {
                     "name": "",
-                    "id": "00c28f60-7d7d-4f72-9875-431493acd5d2",
-                    "path": "<Keyboard>/numpad0",
+                    "id": "a515aab2-c5c3-4328-adb1-26bd82afc189",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
@@ -1274,17 +1263,6 @@
             "devices": [
                 {
                     "devicePath": "<XRController>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": [
-                {
-                    "devicePath": "<Keyboard>",
                     "isOptional": false,
                     "isOR": false
                 }

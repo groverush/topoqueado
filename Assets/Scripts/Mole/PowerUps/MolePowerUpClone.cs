@@ -9,7 +9,6 @@ public class MolePowerUpClone : BasePowerUp
         if (moleController != null && moleController.MolePowerUpManager != null)
         {
             moleController.MolePowerUpManager.UnlockCloneAbility();
-            Debug.Log("Habilidad de Clone desbloqueada para el topo.");
         }
         else
         {

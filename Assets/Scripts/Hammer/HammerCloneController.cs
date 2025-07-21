@@ -5,7 +5,7 @@ public class HammerCloneController : MonoBehaviour
 {
     public Transform hammerBase;
 
-    public void DeactivateClone ()
+    public void DeactivateClone()
     {
         StopAllCoroutines();
         gameObject.SetActive(false);
@@ -24,6 +24,9 @@ public class HammerCloneController : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 1, AudioManager.instance.HammerCloneHitVolume);
+
         transform.position = targetPos;
 
         yield return RotateHammer(initialAngle, hitAngle, downDuration);

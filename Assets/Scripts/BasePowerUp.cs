@@ -11,29 +11,36 @@ public abstract class BasePowerUp : MonoBehaviour
     [SerializeField] private float bounceAmplitude = 0.1f;
     [SerializeField] private float bounceFrequency = 3f;
 
-    public event Action OnCollected;
-
     private bool collected = false;
     private Vector3 initialPosition;
 
-    private void Start ()
+    // === Events ===
+    public Action OnCollected;
+    public Action onEffectApplied;
+
+    private void Start()
     {
         transform.position += offsetPosition;
         initialPosition = transform.position;
 
+        if (AudioManager.instance != null)
+        {
+            OnCollected += () => AudioManager.instance.PlaySFX(AudioManager.SfxType.PowerUp, 0, AudioManager.instance.PowerUpVolume);
+        }
+
         Invoke(nameof(DestroyIfNotCollected), lifeDuration);
     }
 
-    private void Update ()
+    private void Update()
     {
         PowerUpAnimation();
-    }     
+    }
 
-    private void PowerUpAnimation ()
+    private void PowerUpAnimation()
     {
         if (collected) return;
 
-        // Rotación continua sobre el eje Y local
+        // Rotacion continua sobre el eje Y local
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
 
         // Rebote sobre el eje Y sin afectar X ni Z
@@ -43,7 +50,7 @@ public abstract class BasePowerUp : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter ( Collider other )
+    private void OnTriggerEnter(Collider other)
     {
         if (collected) return;
 
@@ -69,15 +76,14 @@ public abstract class BasePowerUp : MonoBehaviour
         }
     }
 
-    protected abstract void ApplyEffect ( GameObject target );
+    protected abstract void ApplyEffect(GameObject target);
 
-    private void DestroyIfNotCollected ()
+    private void DestroyIfNotCollected()
     {
-        if (!collected)
-            HandleCollected();
+        if (!collected) Destroy(gameObject);
     }
 
-    private void HandleCollected ()
+    private void HandleCollected()
     {
         collected = true;
         OnCollected?.Invoke();

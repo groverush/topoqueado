@@ -2,13 +2,21 @@ using UnityEngine;
 
 public class HammerPowerUpVision : BasePowerUp
 {
-    protected override void ApplyEffect ( GameObject target )
+    void OnEnable()
+    {
+        if (AudioManager.instance != null)
+        {
+            onEffectApplied += () => AudioManager.instance.PlaySFX(AudioManager.SfxType.PowerUp, 1, AudioManager.instance.XRayEffectVolume);
+        }
+    }
+    
+    protected override void ApplyEffect(GameObject target)
     {
         var hammer = target.GetComponent<HammerController>();
         if (hammer != null && hammer.PowerUpManager != null)
         {
             hammer.PowerUpManager.ActivateHammerVision();
-            Debug.Log("Hammer Vision PowerUp activado.");
+            onEffectApplied?.Invoke();
         }
     }
 }

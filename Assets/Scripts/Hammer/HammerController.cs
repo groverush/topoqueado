@@ -26,9 +26,11 @@ public class HammerController : MonoBehaviour
     private InputAction hitAction;
     private float moveTimer;
     private bool isHitting = false;
-    public Action OnHammerHitAttempt;
 
-    private void Awake ()
+    // === Events ===
+    public Action OnHammerHitAttempt;
+    
+    private void Awake()
     {
         holeNavigationScript = GetComponent<HoleNavigation>();
         playerInput = GetComponent<PlayerInput>();
@@ -116,6 +118,8 @@ public class HammerController : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 0, AudioManager.instance.HammerHitVolume); 
 
         hammerBase.position = targetPos;
         yield return RotateHammer(initialHammerAngle, hitAngle);
