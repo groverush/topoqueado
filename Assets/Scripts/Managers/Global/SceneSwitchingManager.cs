@@ -86,11 +86,7 @@ public class SceneSwitchingManager : MonoBehaviour
     {
         // Load the main scene
         SceneManager.LoadScene(mainScene);
-<<<<<<< HEAD
         AudioManager.instance.PlayMusic(AudioManager.MusicType.InGame, 1, AudioManager.instance.MainThemeSongVolume);
-=======
-        AudioManager.instance.PlayMusic(AudioManager.MusicType.InGame, 0, AudioManager.instance.MainThemeSongVolume);
->>>>>>> dev
     }
 
     public void OnTutorialButtonClicked()
