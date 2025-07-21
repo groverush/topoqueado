@@ -49,7 +49,6 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            if (Application.isPlaying) DontDestroyOnLoad(gameObject);
         }
         else
         {
