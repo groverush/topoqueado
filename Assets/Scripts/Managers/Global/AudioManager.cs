@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
 
     // === Sfx ===
     [SerializeField] private SfxList[] sfxList;
-    [HideInInspector] public enum SfxType { Hammer, Mole, PowerUp };
+    [HideInInspector] public enum SfxType { Shared, Hammer, Mole, PowerUp };
 
     // === Volumes ===
     [Header("Music Volumes")]
@@ -23,6 +23,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField, Range(0, 1)] private float gameOverSongVolume;
 
     [Header("SFX Volumes")]
+    [SerializeField, Range(0, 1)] private float selectionVolume;
     [SerializeField, Range(0, 1)] private float hammerHitVolume;
     [SerializeField, Range(0, 1)] private float hammerCloneHitVolume;
     [SerializeField, Range(0, 1)] private float moleHitVolume;
@@ -34,6 +35,7 @@ public class AudioManager : MonoBehaviour
     public float MainMenuSongVolume => mainMenuSongVolume;
     public float MainThemeSongVolume => mainThemeSongVolume;
     public float GameOverSongVolume => gameOverSongVolume;
+    public float SelectionVolume => selectionVolume;
     public float HammerHitVolume => hammerHitVolume;
     public float HammerCloneHitVolume => hammerCloneHitVolume;
     public float PowerUpVolume => powerUpVolume;

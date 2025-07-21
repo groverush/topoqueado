@@ -1915,6 +1915,9 @@ MonoBehaviour:
     songs:
     - {fileID: 8300000, guid: e9c8f61e46777cf47a8a44184cb5133e, type: 3}
   sfxList:
+  - name: Shared
+    sfx:
+    - {fileID: 8300000, guid: bcac4df4e63f632499277211009e1b1c, type: 3}
   - name: Hammer
     sfx:
     - {fileID: 8300000, guid: d5a310ae0bcd1a442993100ff0ce0f09, type: 3}
@@ -1929,8 +1932,9 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 186a217984052414bab2fc127d661eb0, type: 3}
     - {fileID: 8300000, guid: cc1266164e1c39d44829058926e222ba, type: 3}
   mainMenuSongVolume: 0.5
-  mainThemeSongVolume: 0.2
+  mainThemeSongVolume: 0.1
   gameOverSongVolume: 1
+  selectionVolume: 0.15
   hammerHitVolume: 0.4
   hammerCloneHitVolume: 0.4
   moleHitVolume: 0.3
