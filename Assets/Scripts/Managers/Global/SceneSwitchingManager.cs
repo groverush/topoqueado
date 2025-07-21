@@ -41,17 +41,6 @@ public class SceneSwitchingManager : MonoBehaviour
 
         pauseAction = playerInput.actions["Pause"];
         // pauseAction.performed += ctx => OnPause();
-
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
     }
     void Start()
     {
