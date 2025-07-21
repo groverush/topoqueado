@@ -11,6 +11,9 @@ public abstract class BasePowerUp : MonoBehaviour
     [SerializeField] private float bounceAmplitude = 0.1f;
     [SerializeField] private float bounceFrequency = 3f;
 
+    // === Power up audio ===
+    [SerializeField] private AudioSource powerUpAudio;
+
     public event Action OnCollected;
 
     private bool collected = false;
@@ -33,7 +36,7 @@ public abstract class BasePowerUp : MonoBehaviour
     {
         if (collected) return;
 
-        // Rotación continua sobre el eje Y local
+        // Rotacion continua sobre el eje Y local
         transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
 
         // Rebote sobre el eje Y sin afectar X ni Z
@@ -54,6 +57,7 @@ public abstract class BasePowerUp : MonoBehaviour
             {
                 ApplyEffect(hammer.gameObject);
                 HandleCollected();
+                powerUpAudio.Play();
                 return;
             }
         }
@@ -65,6 +69,7 @@ public abstract class BasePowerUp : MonoBehaviour
             {
                 ApplyEffect(mole.gameObject);
                 HandleCollected();
+                powerUpAudio.Play();
             }
         }
     }

@@ -4,8 +4,11 @@ using UnityEngine;
 public class HammerCloneController : MonoBehaviour
 {
     public Transform hammerBase;
+    
+    // === Hammer clon audio ===
+    [SerializeField] private AudioSource hammerClonAudio;
 
-    public void DeactivateClone ()
+    public void DeactivateClone()
     {
         StopAllCoroutines();
         gameObject.SetActive(false);
@@ -24,6 +27,9 @@ public class HammerCloneController : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+
+        hammerClonAudio.Play();
+
         transform.position = targetPos;
 
         yield return RotateHammer(initialAngle, hitAngle, downDuration);

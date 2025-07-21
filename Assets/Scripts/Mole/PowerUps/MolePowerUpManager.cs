@@ -6,11 +6,9 @@ public class MolePowerUpManager : MonoBehaviour
 {
     [Header("Clone Settings")]
     [SerializeField] private GameObject moleClonePrefab;
-    [SerializeField] private Vector3 cloneOffset = Vector3.zero;
     [SerializeField] private HoleNavigation holeNavigation;
     [SerializeField] private float moleCloneDuration = 5f;
     private MoleCloneController moleCloneInstance;
-    private Vector3 lastClonePosition;
     private Coroutine cloneTimerRoutine;
 
     [Header("Mole Vision Settings")]
@@ -59,35 +57,23 @@ public class MolePowerUpManager : MonoBehaviour
         moleCloneInstance.gameObject.SetActive(false);
     }
 
-    public void TryShowClone ( Vector3 moleCurrentPosition )
+    public void TryShowClone ( GameObject moleCurrentHole )
     {
         if (!IsCloneAbilityUnlocked || moleCloneInstance == null || holeNavigation == null) return;
         if (moleCloneInstance.IsVisible) return;
 
-        GameObject randomHole = null;
-        int attempts = 10;
-
-        while (attempts > 0)
-        {
-            randomHole = holeNavigation.GetRandomHole();
-            if (randomHole != null && Vector3.Distance(randomHole.transform.position, moleCurrentPosition) > 0.1f)
-                break;
-            attempts--;
-        }
+        GameObject randomHole = holeNavigation.GetRandomHoleExcluding(moleCurrentHole);
 
         if (randomHole != null)
         {
-            Vector3 targetPosition = new Vector3(randomHole.transform.position.x, moleCurrentPosition.y, randomHole.transform.position.z);
-            lastClonePosition = targetPosition;
-            moleCloneInstance.ShowAtPosition(lastClonePosition);
+            Vector3 targetPosition = randomHole.transform.position;
+            moleCloneInstance.ShowAtPosition(targetPosition);
         }
         else
         {
-            Debug.LogWarning("No hay agujeros válidos para el clon.");
+            Debug.LogWarning("No hay agujeros validos para el clon");
         }
     }
-
-
 
     public void HideClone ()
     {
@@ -135,7 +121,6 @@ public class MolePowerUpManager : MonoBehaviour
             float currentSeconds = Mathf.Ceil(timeRemaining);
             if (currentSeconds != lastReportedSeconds)
             {
-                Debug.Log($"[PowerUp Timer] Tiempo restante: {currentSeconds} segundos");
                 lastReportedSeconds = currentSeconds;
             }
         }

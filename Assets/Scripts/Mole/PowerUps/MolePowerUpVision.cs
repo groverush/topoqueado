@@ -9,7 +9,6 @@ public class MoleVisionPowerUp : BasePowerUp
         if (moleController != null && moleController.MolePowerUpManager != null)
         {
             moleController.MolePowerUpManager.ActivateMoleVision();
-            Debug.Log("Mole Vision PowerUp activado.");
         }
         else
         {

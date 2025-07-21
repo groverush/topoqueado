@@ -8,7 +8,6 @@ public class HammerVisionPowerUp : BasePowerUp
         if (hammer != null && hammer.PowerUpManager != null)
         {
             hammer.PowerUpManager.ActivateHammerVision();
-            Debug.Log("Hammer Vision PowerUp activado.");
         }
     }
 }
