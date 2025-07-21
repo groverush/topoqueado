@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1, z: 0.5}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 100, y: 99.999985, z: 99.999985}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,6 +107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f6853f4032bd54ea2247ebb975829f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moleBase: {fileID: 8341136312922395949, guid: dbaeb9a48398e2f4b8ee9c166d2ffa2f, type: 3}
-  posY: 0.25
-  offset: {x: 0, y: 0, z: 0}
+  popOutOffset: {x: 0, y: 0.25, z: -0.1}
+  popInDelay: 0.22
+  popAnimationDuration: 0.12

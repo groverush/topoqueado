@@ -16,6 +16,8 @@ public class CollisionManager : MonoBehaviour
 
     void Awake()
     {
+        AudioManager.instance?.RegisterCollisionManager(this);
+        
         if (hammerController != null)
         {
             hammerController.OnHammerHitAttempt += ValidateHit;
