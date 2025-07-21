@@ -41,6 +41,17 @@ public class SceneSwitchingManager : MonoBehaviour
 
         pauseAction = playerInput.actions["Pause"];
         // pauseAction.performed += ctx => OnPause();
+
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
     void Start()
     {
@@ -75,7 +86,11 @@ public class SceneSwitchingManager : MonoBehaviour
     {
         // Load the main scene
         SceneManager.LoadScene(mainScene);
+<<<<<<< HEAD
         AudioManager.instance.PlayMusic(AudioManager.MusicType.InGame, 1, AudioManager.instance.MainThemeSongVolume);
+=======
+        AudioManager.instance.PlayMusic(AudioManager.MusicType.InGame, 0, AudioManager.instance.MainThemeSongVolume);
+>>>>>>> dev
     }
 
     public void OnTutorialButtonClicked()
