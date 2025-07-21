@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class GlobalGameManager : MonoBehaviour
 {
-    // === Managers ===
-    [SerializeField] private AudioManager audioManager;
-    [SerializeField] private SceneSwitchingManager sceneSwitchingManager;
-
     // === Singleton ===
     public static GlobalGameManager instance;
 
@@ -20,8 +16,5 @@ public class GlobalGameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        audioManager.enabled = true;
-        sceneSwitchingManager.enabled = true;
     }
 }
