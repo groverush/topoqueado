@@ -10,17 +10,14 @@ public class CollisionManager : MonoBehaviour
     // === Hit validation ===
     private bool isHitValidate = false;
 
-    // === Mole audio ===
-    [SerializeField] private AudioSource moleAudio;
-    [SerializeField] private AudioClip hitMoleSound;
-    [SerializeField] private AudioClip laughSound;
-
     // === Events ===
     public event Action<HammerController> OnHitSuccess;
     public event Action<MoleController> OnHitMiss;
 
     void Awake()
     {
+        AudioManager.instance?.RegisterCollisionManager(this);
+        
         if (hammerController != null)
         {
             hammerController.OnHammerHitAttempt += ValidateHit;
@@ -57,8 +54,6 @@ public class CollisionManager : MonoBehaviour
         {
             OnHitSuccess?.Invoke(hammerController);
             isHitValidate = true;
-            moleAudio.clip = hitMoleSound;
-            moleAudio.Play();
         }
     }
 
@@ -69,8 +64,6 @@ public class CollisionManager : MonoBehaviour
         {
             OnHitMiss?.Invoke(moleController);
             isHitValidate = true;
-            moleAudio.clip = laughSound;
-            moleAudio.Play();
         }
     }
 }

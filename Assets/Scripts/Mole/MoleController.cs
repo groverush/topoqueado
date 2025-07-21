@@ -26,6 +26,7 @@ public class MoleController : MonoBehaviour
     [SerializeField] private float popAnimationDuration;
     private bool canPopOut = true;
     private bool isProcessingPopIn = false;
+    private bool wasPopOutReleased = true;
     private Vector3 originalPosition;
     private Vector3 popOutOffset = new(0, 0.25f, -0.1f);
 
@@ -52,15 +53,21 @@ public class MoleController : MonoBehaviour
     {
         holeNavigationScript = GetComponent<HoleNavigation>();
         originalPosition = transform.position;
-        Debug.Log("Topo: " + originalPosition);
 
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["MoveMole"];
         popOutAction = playerInput.actions["PopOut"];
 
+        popOutAction.performed += ctx =>
+        {
+            if (wasPopOutReleased) TryPopOut();
+        };
 
-        popOutAction.performed += ctx => TryPopOut();
-        popOutAction.canceled += ctx => TryPopIn();
+        popOutAction.canceled += ctx =>
+        {
+            wasPopOutReleased = true;
+            TryPopIn();
+        };
     }
 
     void Update()
@@ -81,7 +88,14 @@ public class MoleController : MonoBehaviour
         if (collision.gameObject.CompareTag("Hammer"))
         {
             OnMoleHit?.Invoke(); // Notify CollisionManager
-            TryPopIn();
+            
+            if (popInCoroutine != null) StopCoroutine(popInCoroutine);
+
+            canPopOut = false;
+            isProcessingPopIn = true;
+            popInCoroutine = StartCoroutine(PopInDelayRoutine(true));
+
+            wasPopOutReleased = false; // Locks until the player releases the button
         }
     }
 
@@ -107,7 +121,7 @@ public class MoleController : MonoBehaviour
 
         canPopOut = false;
         isProcessingPopIn = true;
-        popInCoroutine = StartCoroutine(PopInDelayRoutine());
+        popInCoroutine = StartCoroutine(PopInDelayRoutine(false));
     }
 
     private void PopOut()
@@ -118,9 +132,9 @@ public class MoleController : MonoBehaviour
         canMove = false;
     }
 
-    private IEnumerator PopInDelayRoutine()
+    private IEnumerator PopInDelayRoutine(bool instant)
     {
-        yield return new WaitForSeconds(popInDelay);
+        if (!instant) yield return new WaitForSeconds(popInDelay);
 
         StartCoroutine(MoveToPosition(transform.position, originalPosition, popAnimationDuration));
         currentPopState = PopStates.Hidden;

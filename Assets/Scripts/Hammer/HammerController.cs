@@ -26,12 +26,10 @@ public class HammerController : MonoBehaviour
     private InputAction hitAction;
     private float moveTimer;
     private bool isHitting = false;
+
+    // === Events ===
     public Action OnHammerHitAttempt;
     
-    // === Hammer audio ===
-    [SerializeField] private AudioSource hammerAudio;
-    [SerializeField] private AudioClip hitHammerSound;
-
     private void Awake()
     {
         holeNavigationScript = GetComponent<HoleNavigation>();
@@ -121,8 +119,7 @@ public class HammerController : MonoBehaviour
             yield return null;
         }
 
-        hammerAudio.clip = hitHammerSound;
-        hammerAudio.Play();
+        AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 0, AudioManager.instance.HammerHitVolume); 
 
         hammerBase.position = targetPos;
         yield return RotateHammer(initialHammerAngle, hitAngle);

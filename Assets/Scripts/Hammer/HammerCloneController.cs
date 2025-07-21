@@ -4,9 +4,6 @@ using UnityEngine;
 public class HammerCloneController : MonoBehaviour
 {
     public Transform hammerBase;
-    
-    // === Hammer clon audio ===
-    [SerializeField] private AudioSource hammerClonAudio;
 
     public void DeactivateClone()
     {
@@ -28,7 +25,7 @@ public class HammerCloneController : MonoBehaviour
             yield return null;
         }
 
-        hammerClonAudio.Play();
+        AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 1, AudioManager.instance.HammerCloneHitVolume);
 
         transform.position = targetPos;
 
