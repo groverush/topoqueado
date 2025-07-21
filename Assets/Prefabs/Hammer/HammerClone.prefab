@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 497686674807368978}
   - component: {fileID: 4724496077502100760}
   - component: {fileID: 7893068763259981478}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Hammer Head
-  m_TagString: Untagged
+  m_TagString: Hammer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a9d396f1084d70b41a3d77979375728d, type: 2}
+  - {fileID: 2100000, guid: 3b509a1f63ddbc54bb1a6e94310d5608, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammerBase: {fileID: 6717936783099496762}
+  hammerClonAudio: {fileID: 0}
 --- !u!1 &7909444028088223171
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 786fb43e6481a7d43ac82c98fb8684d7, type: 2}
+  - {fileID: 2100000, guid: 2748ebb657758f441acf984e96530a96, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

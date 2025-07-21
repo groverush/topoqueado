@@ -139,7 +139,6 @@ public class HammerPowerUpManager : MonoBehaviour
             float currentSeconds = Mathf.Ceil(timeRemaining);
             if (currentSeconds != lastReportedSeconds)
             {
-                Debug.Log($"[PowerUp Timer] Tiempo restante: {currentSeconds} segundos");
                 lastReportedSeconds = currentSeconds;
             }
         }

@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2989980659999583884}
   serializedVersion: 2
   m_LocalRotation: {x: -0.1736482, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 1, z: 0.5}
+  m_LocalPosition: {x: 1.0199997, y: 3.1316757, z: -1.1186287}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,8 +162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holeNavigationScript: {fileID: 0}
-  movementCooldown: 0.3
-  popOutCooldown: 0.3
+  movementCooldown: 0.15
+  popOutCooldown: 0.15
+  popInDelay: 0.22
+  popAnimationDuration: 0.12
   molePowerUpManager: {fileID: 0}
 --- !u!114 &9167855204645115455
 MonoBehaviour:

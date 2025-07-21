@@ -2,14 +2,22 @@ using UnityEngine;
 
 public class MoleVisionPowerUp : BasePowerUp
 {
-    protected override void ApplyEffect ( GameObject target )
+    void OnEnable()
+    {
+        if (AudioManager.instance != null)
+        {
+            onEffectApplied += () => AudioManager.instance.PlaySFX(AudioManager.SfxType.PowerUp, 1, AudioManager.instance.XRayEffectVolume);
+        }
+    }
+
+    protected override void ApplyEffect(GameObject target)
     {
         MoleController moleController = target.GetComponent<MoleController>();
 
         if (moleController != null && moleController.MolePowerUpManager != null)
         {
             moleController.MolePowerUpManager.ActivateMoleVision();
-            Debug.Log("Mole Vision PowerUp activado.");
+            onEffectApplied?.Invoke();
         }
         else
         {
