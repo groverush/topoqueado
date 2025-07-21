@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoleClonePowerUp : BasePowerUp
+public class MolePowerUpClone : BasePowerUp
 {
     protected override void ApplyEffect ( GameObject target )
     {
