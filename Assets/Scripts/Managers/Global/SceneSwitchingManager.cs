@@ -27,21 +27,20 @@ public class SceneSwitchingManager : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-
-        pauseAction = playerInput.actions["Pause"];
-        // pauseAction.performed += ctx => OnPause();
-
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
             return;
         }
+
+        playerInput = GetComponent<PlayerInput>();
+
+        pauseAction = playerInput.actions["Pause"];
+        // pauseAction.performed += ctx => OnPause();
     }
     void Start()
     {
@@ -76,7 +75,7 @@ public class SceneSwitchingManager : MonoBehaviour
     {
         // Load the main scene
         SceneManager.LoadScene(mainScene);
-        AudioManager.instance.PlayMusic(AudioManager.MusicType.InGame, 0, AudioManager.instance.MainThemeSongVolume);
+        AudioManager.instance.PlayMusic(AudioManager.MusicType.InGame, 1, AudioManager.instance.MainThemeSongVolume);
     }
 
     public void OnTutorialButtonClicked()
