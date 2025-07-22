@@ -100,7 +100,7 @@ public class AudioManager : MonoBehaviour
 #endif
 }
 
-//
+// Structures
 [Serializable]
 public struct SfxList
 {
