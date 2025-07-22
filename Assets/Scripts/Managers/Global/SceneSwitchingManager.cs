@@ -60,7 +60,7 @@ public class SceneSwitchingManager : MonoBehaviour
         {
             AudioManager.instance.PlayMusic(AudioManager.MusicType.MainMenu, 0, AudioManager.instance.MainMenuSongVolume);
         }
-        
+
         pauseAction.Enable(); // Habilita la acción
         pauseAction.performed += OnPause; // Suscribe el método al evento
     }
