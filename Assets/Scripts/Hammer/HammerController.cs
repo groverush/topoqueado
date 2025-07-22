@@ -119,7 +119,7 @@ public class HammerController : MonoBehaviour
             yield return null;
         }
 
-        AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 0, AudioManager.instance.HammerHitVolume); 
+        if(AudioManager.instance != null) AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 0, AudioManager.instance.HammerHitVolume); 
 
         hammerBase.position = targetPos;
         yield return RotateHammer(initialHammerAngle, hitAngle);

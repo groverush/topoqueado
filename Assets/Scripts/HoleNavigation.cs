@@ -110,7 +110,7 @@ public class HoleNavigation : MonoBehaviour
             RemoveHighlight(currentHole);
             currentHole = closestHole;
             Highlight(currentHole);
-            AudioManager.instance.PlaySFX(AudioManager.SfxType.Shared, 0, AudioManager.instance.SelectionVolume);
+            if(AudioManager.instance != null) AudioManager.instance.PlaySFX(AudioManager.SfxType.Shared, 0, AudioManager.instance.SelectionVolume);
         }
     }
 

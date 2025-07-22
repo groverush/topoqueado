@@ -25,7 +25,7 @@ public class HammerCloneController : MonoBehaviour
             yield return null;
         }
 
-        AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 1, AudioManager.instance.HammerCloneHitVolume);
+        if(AudioManager.instance != null) AudioManager.instance.PlaySFX(AudioManager.SfxType.Hammer, 1, AudioManager.instance.HammerCloneHitVolume);
 
         transform.position = targetPos;
 
