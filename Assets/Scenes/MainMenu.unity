@@ -1885,6 +1885,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8457797227453945236, guid: aaedaa61a2fa5734cbfe56f084a3b9af, type: 3}
+      propertyPath: moleLaughVolume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8457797227453945236, guid: aaedaa61a2fa5734cbfe56f084a3b9af, type: 3}
+      propertyPath: mainMenuSongVolume
+      value: 0.092
+      objectReference: {fileID: 0}
+    - target: {fileID: 8457797227453945236, guid: aaedaa61a2fa5734cbfe56f084a3b9af, type: 3}
+      propertyPath: mainThemeSongVolume
+      value: 0.025
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
